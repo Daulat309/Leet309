@@ -32,10 +32,10 @@ class Solution {
         List<Double> res = new ArrayList<>();
         res.add(a + b);
         res.add(a - b);
-        //res.add(b - a);
+        res.add(b - a);
         res.add(a * b);
         if (Math.abs(b) > EPS) res.add(a / b);
-        //if (Math.abs(a) > EPS) res.add(b / a);
+        if (Math.abs(a) > EPS) res.add(b / a);
         return res;
     }
 }
