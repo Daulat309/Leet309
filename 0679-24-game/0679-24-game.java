@@ -35,7 +35,7 @@ class Solution {
         //res.add(b - a);
         res.add(a * b);
         if (Math.abs(b) > EPS) res.add(a / b);
-        if (Math.abs(a) > EPS) res.add(b / a);
+        //if (Math.abs(a) > EPS) res.add(b / a);
         return res;
     }
 }
