@@ -12,7 +12,7 @@ class Solution {
             return Math.abs(nums.get(0) - 24.0) < EPS;
         }
         for (int i = 0; i < nums.size(); i++) {
-            for (int j = 0; j < nums.size(); j++) {
+            for (int j = i+1; j < nums.size(); j++) {
                 if (i == j) continue;
                 List<Double> next = new ArrayList<>();
                 for (int k = 0; k < nums.size(); k++) {
@@ -32,10 +32,10 @@ class Solution {
         List<Double> res = new ArrayList<>();
         res.add(a + b);
         res.add(a - b);
-        //res.add(b - a);
+        res.add(b - a);
         res.add(a * b);
         if (Math.abs(b) > EPS) res.add(a / b);
-        //if (Math.abs(a) > EPS) res.add(b / a);
+        if (Math.abs(a) > EPS) res.add(b / a);
         return res;
     }
 }
