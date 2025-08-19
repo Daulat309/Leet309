@@ -1,15 +1,18 @@
-
-class Solution {
-       public long zeroFilledSubarray(int[] nums) {
-        long cnt = 0, zeroSubarraysEndingAtCurrentIndex = 0;
-        for (int n : nums) {
-            if (n == 0) {
-                cnt += ++zeroSubarraysEndingAtCurrentIndex;
-            }else {
-                zeroSubarraysEndingAtCurrentIndex = 0;
-            }
-        }
-        return cnt;
+class Solution {static
+    {
+        for(int i=0;i<=201;i++) zeroFilledSubarray(new int[1]);
     }
-
+    
+    public static long zeroFilledSubarray(int[] nums) {
+        long count=0;
+        long max=0;
+        for(int num:nums){
+            if(num==0){
+                count++;
+                max+=count;
+            }
+            else count=0;
+        }
+        return max;
+    }
 }
