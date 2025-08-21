@@ -1,17 +1,33 @@
 class Solution {
-        public int numSubmat(int[][] mat) {
-        int m = mat.length, n = mat[0].length, height[] = new int[n], res = 0; 
-        for (int i = 0; i < m; i++) {
-            Stack<int[]> st = new Stack<>();
-            for (int j = 0; j < n; j++) {
-                height[j] = mat[i][j] == 0 ? 0 : (height[j] + 1);   //  height of histogram;
-                int sum = 0;
-                while(!st.isEmpty() && height[st.peek()[0]] >= height[j]) st.pop();
-                if (!st.isEmpty()) sum += height[j] * (j - st.peek()[0]) + st.peek()[1];
-                else sum += height[j] * (j + 1);
-                st.push(new int[]{j, sum});
-                res += sum;
+    public int numSubmat(int[][] mat) {
+        int r = mat.length, c = mat[0].length;
+        int[] h = new int[c];
+        int ans = 0;
+
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                h[j] = (mat[i][j] == 0) ? 0 : h[j] + 1;
             }
+            ans += count(h);
+        }
+        return ans;
+    }
+
+    private int count(int[] h) {
+        int n = h.length, res = 0;
+        int[] sum = new int[n];
+        Deque<Integer> st = new ArrayDeque<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!st.isEmpty() && h[st.peek()] >= h[i]) st.pop();
+            if (!st.isEmpty()) {
+                int p = st.peek();
+                sum[i] = sum[p] + h[i] * (i - p);
+            } else {
+                sum[i] = h[i] * (i + 1);
+            }
+            st.push(i);
+            res += sum[i];
         }
         return res;
     }
