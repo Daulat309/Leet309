@@ -1,21 +1,19 @@
 class Solution {
     public int minimumArea(int[][] grid) {
-        List<Integer> x = new ArrayList<>();
-        List<Integer> y = new ArrayList<>();
+        int minRow = grid.length, maxRow = -1;
+        int minCol = grid[0].length, maxCol = -1;
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1) {
-                    x.add(j);
-                    y.add(i);
+                    minRow = Math.min(minRow, i);
+                    maxRow = Math.max(maxRow, i);
+                    minCol = Math.min(minCol, j);
+                    maxCol = Math.max(maxCol, j);
                 }
             }
         }
 
-        Collections.sort(x);
-        Collections.sort(y);
-
-        return (x.get(x.size() - 1) - x.get(0) + 1) *
-               (y.get(y.size() - 1) - y.get(0) + 1);
+        return (maxRow - minRow + 1) * (maxCol - minCol + 1);
     }
 }
