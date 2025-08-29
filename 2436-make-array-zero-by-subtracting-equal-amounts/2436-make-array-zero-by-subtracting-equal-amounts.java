@@ -1,11 +1,16 @@
-import java.util.*;
-
 class Solution {
     public int minimumOperations(int[] nums) {
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            if (num != 0) set.add(num);
+        int n = nums.length;
+        if(n==1&&nums[0]!=0) return 1;
+        boolean[] ar = new boolean[101];
+        int[] arr = new int[101];
+        int k = 0;
+        for(int i = 0;i<n;i++){
+            if (ar[nums[i]] == false && ar[i] != 0){
+                arr[k++] = nums[i];
+                ar[nums[i]] = true;
+            }
         }
-        return set.size();
+        return k;
     }
 }
