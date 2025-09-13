@@ -15,7 +15,6 @@ class Solution {
                     varr[(int)ch]++;
                     if(varr[(int)ch]>cmax) cmax = varr[(int)ch];
                     break;
-                default : System.out.println();
             }
         }
         return cmax + vmax;
