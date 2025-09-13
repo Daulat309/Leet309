@@ -11,10 +11,9 @@ class Solution {
                     varr[(int)ch]++;
                     if(varr[(int)ch]>vmax) vmax = varr[(int)ch];
                     break;
-                case 'b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z' :
+                default :
                     varr[(int)ch]++;
                     if(varr[(int)ch]>cmax) cmax = varr[(int)ch];
-                    break;
             }
         }
         return cmax + vmax;
