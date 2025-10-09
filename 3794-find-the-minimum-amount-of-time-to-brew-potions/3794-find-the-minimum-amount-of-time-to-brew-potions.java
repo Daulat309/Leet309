@@ -1,17 +1,23 @@
 class Solution {
     public long minTime(int[] skill, int[] mana) {
-        int n = skill.length, m = mana.length;
-        long[] done = new long[n + 1];
-        
-        for (int j = 0; j < m; ++j) {
-            for (int i = 0; i < n; ++i) {
-                done[i + 1] = Math.max(done[i + 1], done[i]) + (long) mana[j] * skill[i];
+        int n = skill.length;
+        int m = mana.length;
+
+        long[] sPre = new long[n];
+        for (int i = 1; i < n; i++) 
+            sPre[i] = sPre[i - 1] + skill[i];
+
+        long tSum = (long) skill[0] * mana[0];
+
+        for (int j = 1; j < m; j++) {
+            long tMax = (long) skill[0] * mana[j];
+            for (int i = 1; i < n; i++) {
+                long tDiff = sPre[i] * mana[j - 1] - sPre[i - 1] * mana[j];
+                if (tDiff > tMax) 
+                    tMax = tDiff;
             }
-            for (int i = n - 1; i > 0; --i) {
-                done[i] = done[i + 1] - (long) mana[j] * skill[i];
-            }
+            tSum += tMax;
         }
-        
-        return done[n];
+        return tSum + sPre[n - 1] * mana[m - 1];
     }
 }
