@@ -7,7 +7,7 @@ class Solution {
         for(int i = 0;i<n;i++){
             if(a[nums[i]]){
                 ar[k++] = nums[i];
-                if(k==2) break;
+                //if(k==2) break;
             }    
             else a[nums[i]] = true;
         }
