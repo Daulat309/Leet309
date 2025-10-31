@@ -8,9 +8,6 @@ class Solution {
             if(a[nums[i]]==true) ar[k++] = nums[i];
             else a[nums[i]] = true;
         }
-        if(ar[0]>ar[1]){
-            int temp = ar[0]; ar[0] = ar[1]; ar[1] = temp;
-        }
         return ar;
     }
 }
