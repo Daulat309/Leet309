@@ -7,8 +7,8 @@ class Solution {
         int count = 0;
         for(int i = 0;i<n-1;i++){
             cs += nums[i];
-            int rs = ts-cs;
-            if(rs%2==cs%2) count++;
+            ts -= nums[i];
+            if((ts-cs)%2==0) count++;
         }
         return count;
     }
