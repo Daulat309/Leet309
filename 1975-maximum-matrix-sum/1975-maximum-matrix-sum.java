@@ -3,8 +3,10 @@ class Solution {
         long sum = 0;
         int count = 0;
         int abs = 100001;
-        for(int i = 0;i<m.length;i++){
-            for(int j = 0;j<m[i].length;j++){
+        int n = m.length;
+        int mm = m[0].length;
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<mm;j++){
                 abs = Math.min(Math.abs(m[i][j]),abs);
                 if(m[i][j]<0){
                     sum += m[i][j]*(-1);
