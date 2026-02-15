@@ -43,7 +43,7 @@ class Solution {
             i--;
         }
         while (j >= 0){
-            int b = a2.charAt(i)-'0';
+            int b = a2.charAt(j)-'0';
             if(b+c==2){
                 sb.append(0);
                 c = 1;
