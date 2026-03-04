@@ -4,8 +4,8 @@ class Solution {
         int idx = 2;
         if(ruleKey.equals("type")) idx = 0;
         else if(ruleKey.equals("color")) idx = 1;
-        for(List<String> list : items){
-            if(list.get(idx).equals(ruleValue)) cnt++;
+        for(int i = 0;i<items.size();i++){
+            if(items.get(i).get(idx).equals(ruleValue)) cnt++;
         }
         return cnt;
     }
