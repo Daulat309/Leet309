@@ -13,7 +13,6 @@ class Solution {
                 if(ar[i][j]%2!=0) cnt++;
             }
         }
-        for(int[] a : ar) System.out.println(Arrays.toString(a));
         return cnt;
     }
 }
