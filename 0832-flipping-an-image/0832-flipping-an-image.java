@@ -10,7 +10,6 @@ class Solution {
                 h--;
             }
         }
-        for(int[] ar : image) System.out.println(Arrays.toString(ar));
         return image;
     }
 }
