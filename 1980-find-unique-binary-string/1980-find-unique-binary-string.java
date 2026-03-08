@@ -5,11 +5,9 @@ class Solution {
         int n = nums[0].length();
         String[] arr = new String[1 << n];
         for(int i = 0; i < (1 << n); i++){
-            arr[i] = String.format("%" + n + "s", Integer.toBinaryString(i)).replace(' ', '0');
+            String s = String.format("%" + n + "s", Integer.toBinaryString(i)).replace(' ', '0');
+            if(k < nums.length && !s.equals(nums[k++])) return s;
         }
-        for(int i = 0;i<nums.length;i++){
-            if(!nums[i].equals(arr[i])) return arr[i];
-        }
-        return arr[nums.length];
+        return String.format("%" + n + "s", Integer.toBinaryString(1 << n - 1)).replace(' ', '0');
     }
 }
