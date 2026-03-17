@@ -1,6 +1,5 @@
 class Solution {
     public int[] searchRange(int[] ar, int x) {
-        // if(ar.length==0) return new int[] {-1,-1};
         return new int[]{lb(ar,x),ub(ar,x)};
     }
 
