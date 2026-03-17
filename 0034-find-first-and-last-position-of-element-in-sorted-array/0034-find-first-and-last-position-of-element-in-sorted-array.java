@@ -3,7 +3,7 @@ class Solution {
         if(ar.length==0) return new int[] {-1,-1};
         int[] arr = new int[2];
         int lbb = lb(ar,x);
-        arr[0] = lbb==-1?-1:ar[lbb]==x?lbb:-1;
+        arr[0] = lbb==-1?-1:lbb;
         arr[1] = arr[0]==-1?-1:ub(ar,x)-1;
         return arr;
     }
@@ -16,7 +16,7 @@ class Solution {
             if(ar[mid]>=x) h = mid-1;
             else l = mid + 1;
         }
-        return l==ar.length?-1:l;
+        return l==ar.length||ar[l]!=x?-1:l;
     }
 
     public static int ub(int[] ar, int x){
