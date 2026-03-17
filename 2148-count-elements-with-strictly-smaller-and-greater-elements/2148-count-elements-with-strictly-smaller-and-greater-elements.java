@@ -16,8 +16,6 @@ class Solution {
                 break;
             }
         }
-        System.out.println(Arrays.toString(arr));
-        System.out.println(k+" "+l);
         return k-l+1;
     }
 }
