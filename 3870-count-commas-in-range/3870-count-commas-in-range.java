@@ -6,8 +6,6 @@ class Solution {
             k /= 10;
             digit++;
         }
-        k = 1;
-        System.out.println(k+" "+digit);
         return ((n-1000+1)*(digit/4));
     }
 }
