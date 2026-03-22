@@ -7,7 +7,6 @@ class Solution {
             digit++;
         }
         k = 1;
-        for(int i = 1;i<digit;i++) k*=10;
         System.out.println(k+" "+digit);
         return ((n-1000+1)*(digit/4));
     }
