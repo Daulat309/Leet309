@@ -1,8 +1,7 @@
 class Solution {
 
     class DSU {
-        int[] parent;
-        int[] rank;
+        int[] parent, rank;
 
         DSU(int n) {
             parent = new int[n];
@@ -11,37 +10,20 @@ class Solution {
         }
 
         int findPar(int x) {
-            if(parent[x] == x) return x;
-            return parent[x] = findPar(parent[x]);
+            if(parent[x] != x)
+                parent[x] = findPar(parent[x]);
+            return parent[x];
         }
 
         void unite(int x, int y) {
-            int px = findPar(x);
-            int py = findPar(y);
-
+            int px = findPar(x), py = findPar(y);
             if(px == py) return;
 
             if(rank[px] < rank[py]) parent[px] = py;
             else if(rank[px] > rank[py]) parent[py] = px;
             else {
-                parent[px] = py;
-                rank[py]++;
-            }
-        }
-    }
-
-    void compute(String word, int[][] dp) {
-        int n = word.length();
-        for(int i = n - 1; i >= 0; i--) {
-            for(int j = n - 1; j >= 0; j--) {
-                if(word.charAt(i) == word.charAt(j)) {
-                    if(i + 1 < n && j + 1 < n)
-                        dp[i][j] = 1 + dp[i + 1][j + 1];
-                    else
-                        dp[i][j] = 1;
-                } else {
-                    dp[i][j] = 0;
-                }
+                parent[py] = px;
+                rank[px]++;
             }
         }
     }
@@ -61,12 +43,15 @@ class Solution {
             }
         }
 
+        for(int i = 0; i < n; i++)
+            dsu.parent[i] = dsu.findPar(i);
+
         char[] grp = new char[n];
         char[] word = new char[n];
         char c = 'a';
 
         for(int i = 0; i < n; i++) {
-            int p = dsu.findPar(i);
+            int p = dsu.parent[i];
             if(grp[p] == 0) {
                 if(c > 'z') return "";
                 grp[p] = c++;
@@ -74,19 +59,20 @@ class Solution {
             word[i] = grp[p];
         }
 
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                if(lcp[i][j] == 0 && word[i] == word[j])
-                    return "";
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = n - 1; j >= 0; j--) {
+                int val;
+                if(word[i] == word[j]) {
+                    if(i + 1 < n && j + 1 < n)
+                        val = 1 + lcp[i + 1][j + 1];
+                    else
+                        val = 1;
+                } else val = 0;
+
+                if(val != lcp[i][j]) return "";
             }
         }
 
-        int[][] dp = new int[n][n];
-        compute(new String(word), dp);
-
-        if(java.util.Arrays.deepEquals(dp, lcp))
-            return new String(word);
-
-        return "";
+        return new String(word);
     }
 }
