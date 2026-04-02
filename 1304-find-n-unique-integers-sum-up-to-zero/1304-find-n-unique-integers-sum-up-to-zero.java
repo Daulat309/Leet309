@@ -1,12 +1,13 @@
 class Solution {
     public int[] sumZero(int n) {
-        int[] arr = new int[n];
-        int k = 1;
-        for (int i = 0; i < n / 2; i++) {
-            arr[i] = k;
-            arr[n - 1 - i] = -k;
-            k++;
+        int[] a = new int[n];
+        int l = 0, h = n-1;
+        while(l<=h){
+            a[l] = l - h;
+            a[h] = h - l;
+            l++;
+            h--;
         }
-        return arr;
+        return a;
     }
 }
