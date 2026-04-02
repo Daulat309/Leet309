@@ -7,6 +7,6 @@ class Solution {
             else e++;
         }
         System.out.println(e+" "+o);
-        return Math.min(e,o);
+        return e>o?o:e;
     }
 }
