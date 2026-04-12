@@ -2,7 +2,7 @@ class Solution {
     public int longestCommonPrefix(int[] a, int[] b) {
         HashSet<String> set = new HashSet<>();
         for(int i : a){
-            String s = Integer.toString(i);
+            String s = String.valueOf(i);
             String p = "";
             for(char ch : s.toCharArray()){
                 p += ch;
@@ -11,7 +11,7 @@ class Solution {
         }
         int ml = 0;
         for(int i : b){
-            String s = Integer.toString(i);
+            String s = String.valueOf(i);
             String p = "";
             for(char ch : s.toCharArray()){
                 p += ch;
