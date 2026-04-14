@@ -5,9 +5,10 @@ class Solution {
             if(s.charAt(j)==t.charAt(i)){
                 i++;
                 cnt++;
+                if(cnt==t.length()) return 0;
             }
             j++;
         }
-        return Math.max(0,t.length()-cnt);
+        return t.length()-cnt;
     }
 }
