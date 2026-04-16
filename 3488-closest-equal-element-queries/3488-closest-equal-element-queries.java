@@ -21,7 +21,6 @@ class Solution {
 
             int d1 = Math.abs(s-prev);
             int d2 = Math.abs(s-next);
-            System.out.println(d1+"  "+d2);
             d1 = Math.min(n.length-d1,d1);
             d2 = Math.min(n.length-d2,d2);
             
