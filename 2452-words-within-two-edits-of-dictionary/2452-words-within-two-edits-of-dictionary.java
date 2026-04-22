@@ -33,7 +33,7 @@ class Solution {
         if(idx==s.length()) return node.eow;
         int c = s.charAt(idx)-'a';
         if(node.child[c]!=null){
-                if(dfs(s,idx+1,er,node.child[c])) return true;
+            if(dfs(s,idx+1,er,node.child[c])) return true;
         }
         for(int i = 0;i<26;i++){
             if(node.child[i]!=null){
