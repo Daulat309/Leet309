@@ -31,11 +31,13 @@ class Solution {
     public boolean dfs(String s,int idx,int er,Node node){
         if(er>2) return false;
         if(idx==s.length()) return node.eow;
+        int c = s.charAt(idx)-'a';
+        if(node.child[c]!=null){
+                if(dfs(s,idx+1,er,node.child[c])) return true;
+        }
         for(int i = 0;i<26;i++){
-            
             if(node.child[i]!=null){
-                int ner = er + (i!=(s.charAt(idx)-'a')?1:0);
-                if(dfs(s,idx+1,ner,node.child[i])) return true;
+                if(dfs(s,idx+1,er+1,node.child[i])) return true;
             }
         }
         return false;
