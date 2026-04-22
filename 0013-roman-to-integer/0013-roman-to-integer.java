@@ -1,35 +1,23 @@
 class Solution {
     public int romanToInt(String s) {
         int sm = 0;
-        char past = s.charAt(s.length()-1);
-        for(int i = s.length()-1;i>=0;i--){
-            if(s.charAt(i)=='I'){
-                if(past=='V'||past=='X'||past=='L'||past=='C'||past=='D'||past=='M') sm-= 1;
-                else sm += 1;
-            }
-            else if(s.charAt(i)=='V'){
-                if(past=='X'||past=='L'||past=='C'||past=='D'||past=='M') sm-= 5;
-                else sm += 5;
-            }
-            else if(s.charAt(i)=='X'){
-                if(past=='L'||past=='C'||past=='D'||past=='M') sm-= 10;
-                else sm += 10;
-            }
-            else if(s.charAt(i)=='L'){
-                if(past=='C'||past=='D'||past=='M') sm-= 50;
-                else sm += 50;
-            }
-            else if(s.charAt(i)=='C'){
-                if(past=='D'||past=='M') sm-= 100;
-                else sm += 100;
-            }
-            else if(s.charAt(i)=='D'){
-                if(past=='M') sm-= 500;
-                else sm += 500;
-            }
-            else sm+= 1000;
-            past = s.charAt(i);
+        for(int i = 0;i<s.length();i++){
+            int cur = val(s.charAt(i));
+            if(i<s.length()-1&&cur<val(s.charAt(i+1))) sm-= cur;
+            else sm += cur;
         }
         return sm;
+    }
+
+    public int val(char c){
+        switch(c){
+            case 'I' : return 1;
+            case 'V' : return 5;
+            case 'X' : return 10;
+            case 'L' : return 50;
+            case 'C' : return 100;
+            case 'D' : return 500;
+            default : return 1000;
+        }
     }
 }
