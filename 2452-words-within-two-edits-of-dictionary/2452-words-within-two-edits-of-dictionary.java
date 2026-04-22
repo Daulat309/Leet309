@@ -35,7 +35,7 @@ class Solution {
             
             if(node.child[i]!=null){
                 int ner = er + (i!=(s.charAt(idx)-'a')?1:0);
-                if(dfs(s,idx+1,ner,node.child[i])) return true;;
+                if(dfs(s,idx+1,ner,node.child[i])) return true;
             }
         }
         return false;
