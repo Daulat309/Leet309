@@ -14,18 +14,12 @@ class Solution {
                 arr[k++] = grid[i][j];
             }
         }
-
         Arrays.sort(arr);
-
-
-        int median = arr[arr.length / 2];
-
+        int md = arr[arr.length / 2];
         int res = 0;
-
         for (int val : arr) {
-            res += Math.abs(val - median) / x;
+            res += Math.abs(val - md) / x;
         }
-
         return res;
     }
 }
