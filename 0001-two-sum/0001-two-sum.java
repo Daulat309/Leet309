@@ -6,6 +6,7 @@ class Solution {
         int f = -1, s = -1;
         int l = 0, h = a.length-1;
         while(l<h){
+            System.out.println(a[l]+"  "+a[h]);
             int sm = a[l]+a[h];
             if(sm==x){
                 f = a[l];
