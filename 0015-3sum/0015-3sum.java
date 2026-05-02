@@ -14,7 +14,7 @@ class Solution {
                 }
                 while(j+1<n.length&&n[j]==n[j+1]) j++;
             }
-            while(i+1<n.length-1&&n[i]==n[i+1]) i++;
+            while(i+1<n.length&&n[i]==n[i+1]) i++;
         }
         return list;
     }
