@@ -3,24 +3,17 @@ class Solution {
         int mnc = 1000000;
         int l = 0, h = 0;
         int s = 0;
-
-        while(l<n.length){
-            if(h==n.length){
-                l++;
-                h = l;
-                s = 0;
-            }
-            else{
+        while (h < n.length) {
             s += n[h];
-            if(s>=x){
-                mnc = Math.min(h-l+1,mnc);
+            h++;
+            while (s >= x) {
+                mnc = Math.min(mnc, h - l);
+                s -= n[l];
                 l++;
-                h = l;
-                s = 0;
-            }
-            else h++;
-            }
+            }   
         }
+
+
 
 
 
