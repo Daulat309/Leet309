@@ -1,41 +1,19 @@
 class Solution {
     public int totalFruit(int[] fr) {
-        int f = fr[0], s = -1;
-        int l = 0, h = 1;
-        int cc = 1, mxc = 1;
-
-        int lastCount = 1;
-
-        while (h < fr.length) {
-            if (fr[h] == f || fr[h] == s) {
-                cc++;
-            } else {
-                if (s == -1) {
-                    s = fr[h];
-                    cc++;
-                } else {
-                    // shrink to last continuous block
-                    cc = lastCount + 1;
-                    l = h - lastCount;
-
-                    // IMPORTANT FIX:
-                    // last continuous fruit becomes one type
-                    f = fr[h - 1];
-                    s = fr[h];
-                }
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        int l = 0, h = 0, mxc = 0;
+        while(h<fr.length){
+            int c = fr[h];
+            freq.put(c,freq.getOrDefault(c,0)+1);
+            while(freq.size()>2){
+                int ch = fr[l];
+                freq.put(ch,freq.get(ch)-1);
+                if(freq.get(ch)==0) freq.remove(ch);
+                l++;
             }
-            
-            // update lastCount
-            if (fr[h] == fr[h - 1]) {
-                lastCount++;
-            } else {
-                lastCount = 1;
-            }
-
-            mxc = Math.max(mxc, cc);
+            if(freq.size()<=2) mxc = Math.max(mxc,h-l+1);
             h++;
         }
-
         return mxc;
     }
 }
