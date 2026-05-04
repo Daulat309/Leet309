@@ -8,11 +8,11 @@ class Solution {
             int mxc = Mxc(freq);
             int diff = len - mxc;
             while(diff>k&&l<=h){
-                freq[s.charAt(l)-'A']--;
+                freq[s.charAt(l++)-'A']--;
                 len = h - l +1;
                 mxc = Mxc(freq);
                 diff = len - mxc;
-                l++;
+                //l++;
             }
             mxl = Math.max(h-l+1,mxl);
             h++;
