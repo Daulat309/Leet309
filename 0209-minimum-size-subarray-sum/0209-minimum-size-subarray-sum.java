@@ -1,35 +1,16 @@
 class Solution {
     public int minSubArrayLen(int x, int[] n) {
-        int mnc = 1000000;
-        int l = 0, h = 0;
-        int s = 0;
-        while (h < n.length) {
+        int l = 0, h = 0, s = 0, mnl = 1000000;
+        while(h<n.length){
             s += n[h];
-            h++;
-            while (s >= x) {
-                mnc = Math.min(mnc, h - l);
+            if(s>=x) mnl = Math.min(mnl, h-l+1);
+            while(s>x&&l<=h){
                 s -= n[l];
                 l++;
-            }   
+                if(s>=x) mnl = Math.min(mnl, h-l+1);
+            }
+            h++;
         }
-
-
-
-
-
-
-        // for(int i = 0;i<n.length;i++){
-        //     int s = 0;
-        //     int l = i;
-        //     while(l<n.length){
-        //         s += n[l];
-        //         if(s>=x){
-        //             mnc = Math.min((l-i+1),mnc);
-        //             break;
-        //         }
-        //         l++;
-        //     }
-        // }
-        return mnc==1000000?0:mnc;
+        return mnl==1000000?0:mnl;
     }
 }
