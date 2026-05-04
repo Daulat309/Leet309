@@ -12,7 +12,6 @@ class Solution {
                 len = h - l +1;
                 mxc = Mxc(freq);
                 diff = len - mxc;
-                //l++;
             }
             mxl = Math.max(h-l+1,mxl);
             h++;
