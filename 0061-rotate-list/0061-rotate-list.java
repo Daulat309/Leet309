@@ -18,7 +18,6 @@ class Solution {
         }
         if(size==0) return head;
         k = k % size;
-        
         //System.out.println(size);
         ArrayList<Integer> list = new ArrayList<>();
         int f = size - k;
