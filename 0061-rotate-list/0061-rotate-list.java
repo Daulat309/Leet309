@@ -12,34 +12,44 @@ class Solution {
     public ListNode rotateRight(ListNode head, int k) {
         int size = 0;
         ListNode temp = head;
-        while(temp!=null){
+
+        while (temp != null) {
             temp = temp.next;
             size++;
         }
-        if(size==0) return head;
+
+        if (size == 0) return head;
+
         k = k % size;
-        //System.out.println(size);
+        if (k == 0) return head;
+
         ArrayList<Integer> list = new ArrayList<>();
         int f = size - k;
+
         temp = head;
         int n = 0;
-        while(temp!=null){
+
+        while (temp != null) {
             n++;
-            if(n>f) list.add(temp.val);
+            if (n > f) list.add(temp.val);
             temp = temp.next;
         }
-        for(int i = list.size()-1;i>=0;i--){
+
+       
+        for (int i = list.size() - 1; i >= 0; i--) {
             ListNode node = new ListNode(list.get(i));
             node.next = head;
             head = node;
         }
+
+        
         temp = head;
-        n = 1;
-        while(n!=size){
-            size--;
+        for (int i = 1; i < size; i++) { 
             temp = temp.next;
         }
+
         temp.next = null;
+
         return head;
     }
 }
