@@ -1,20 +1,20 @@
 class Solution {
     public boolean isHappy(int n) {
-        if(n==1) return true;
-        int sl = n;
-        int ft = n;
-        do{
-            sl = sqValue(sl);
-            ft = sqValue(sqValue(ft));
-        }while(sl!=ft);
+        int slow = n, fast = n;
 
-        return sl==1;
+        do {
+            slow = next(slow);
+            fast = next(next(fast));
+        } while (slow != fast);
+
+        return slow == 1;
     }
 
-    public int sqValue(int n){
+    private int next(int n) {
         int sum = 0;
-        while(n>0){
-            sum += Math.pow(n%10,2);
+        while (n > 0) {
+            int d = n % 10;
+            sum += d * d; 
             n /= 10;
         }
         return sum;
