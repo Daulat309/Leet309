@@ -5,7 +5,7 @@ class Solution {
         do{
             sl = sqr(sl);
             fs = sqr(sqr(fs));
-        }while(sl!=fs);
+        }while(sl!=fs&&sl!=1);
         return sl==1;
     }
 
