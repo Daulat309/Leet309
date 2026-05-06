@@ -1,21 +1,29 @@
 class Solution {
     public boolean isHappy(int n) {
-        int sl = n;
-        int fs = n;
-        do{
-            sl = sqr(sl);
-            fs = sqr(sqr(fs));
-        }while(sl!=fs&&sl!=1);
-        return sl==1;
-    }
 
-    public int sqr(int n){
-        int s = 0;
-        while(n>0){
-            int d = n % 10;
-            s += d*d;
-            n /= 10;
-        }
-        return s;
-    }
+        while(n != 1 && n != 4){
+
+           int sum = 0;
+
+                while(n > 0){
+
+                int digit   =  n % 10;
+
+                n /=10;
+
+              sum += digit * digit;
+            }
+    
+              n = sum;
+            }
+            
+
+            if(n == 1){
+                return true;
+            }
+            
+
+        return false;
+    
+     }
 }
