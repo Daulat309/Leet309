@@ -1,12 +1,10 @@
 class Solution {
     public int maxAbsoluteSum(int[] nums) {
-        int h = 1, mx = nums[0], mn = nums[0],mncur = nums[0], mxcur = nums[0],res = Math.abs(nums[0]);
+        int h = 0, mx = 0, mn =0,mncur = nums[0], mxcur = nums[0],res =0;
         while(h<nums.length){
-            mxcur = Math.max(mxcur+nums[h],nums[h]);
-            mncur = Math.min(mncur+nums[h],nums[h]);
-            mx = Math.max(mx,mxcur);
-            mn = Math.min(mn,mncur);
-            res = Math.max(Math.abs(mx),Math.abs(mn));
+            mx = Math.max(mx+nums[h],nums[h]);
+            mn = Math.min(mn+nums[h],nums[h]);
+            res = Math.max(res,Math.max(mx,Math.abs(mn)));
             h++;
         }
         return res;
