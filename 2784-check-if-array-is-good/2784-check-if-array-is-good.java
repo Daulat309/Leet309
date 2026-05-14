@@ -1,6 +1,5 @@
 class Solution {
     public boolean isGood(int[] nums) {
-        //Arrays.sort(nums);
         int cnt = 0;
         int mn = nums[0];
         int mx = nums[0];
