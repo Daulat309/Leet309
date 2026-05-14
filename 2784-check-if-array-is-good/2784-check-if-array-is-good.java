@@ -7,6 +7,6 @@ class Solution {
             s += nums[i];
             s -= i;
         }
-        return s==n-1&&nums[n-1]==n-1&&nums[0]==1&&nums[n-1]==nums[n-2];
+        return s==n-1&&nums[0]==1&&nums[n-1]==nums[n-2];
     }
 }
