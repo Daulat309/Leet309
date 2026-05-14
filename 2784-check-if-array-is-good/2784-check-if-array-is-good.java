@@ -1,18 +1,31 @@
 class Solution {
     public boolean isGood(int[] nums) {
-        int cnt = 0;
-        int mn = nums[0];
-        int mx = nums[0];
+
         int n = nums.length;
-        int s = nums[0];
-        if(nums[0]==n-1) cnt++;
-        for(int i = 1;i<nums.length;i++){
-            s += nums[i];
-            s -= i;
-            if(nums[i]==n-1) cnt++;
-            mn = Math.min(mn,nums[i]);
-            mx = Math.max(mx,nums[i]);
+
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        int sum = 0;
+        int cnt = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            sum += nums[i];
+
+            min = Math.min(min, nums[i]);
+            max = Math.max(max, nums[i]);
+
+            if (nums[i] == n - 1) {
+                cnt++;
+            }
         }
-        return s==n-1&&mn==1&&mx==n-1&&cnt==2;
+
+        int expected = (n - 1) * n / 2 + (n - 1);
+
+        return sum == expected &&
+               min == 1 &&
+               max == n - 1 &&
+               cnt == 2;
     }
 }
