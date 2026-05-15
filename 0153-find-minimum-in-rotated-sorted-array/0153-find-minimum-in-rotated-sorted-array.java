@@ -9,12 +9,9 @@ class Solution {
         int l = 0, h = a.length-1;
         while(l<h){
             int m = l + (h-l)/2;
-            if(m<h&&a[m]>a[m+1]) return m;
-            if(m>l&&a[m]<a[m-1]) return m-1;
-
-            if(a[l]<=a[m]) l = m+1;
-            else h = m-1;
+            if(a[m]>a[h]) l = m+1;
+            else h = m;
         }
-        return l;
+        return (l - 1 + a.length)%a.length;
     }
 }
