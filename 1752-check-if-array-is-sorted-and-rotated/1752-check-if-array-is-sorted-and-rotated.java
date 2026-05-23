@@ -9,10 +9,10 @@ class Solution {
             }
         }
         int i = s;
-        do{
+       while((i+1)%l!=s%l){
             if(nums[i%l]>nums[(i+1)%l]) return false;
             i++;
-        }while((i+1)%l!=s%l);
+        }
         return true;
     }
 }
