@@ -8,10 +8,9 @@ class Solution {
             if(nums[i]==0) zr++;
             else on++;
             int d = zr - on;
-            if(d==0) max = Math.max(max,i+1);
-            else if(map.containsKey(d)&&d!=0) {
+            if(map.containsKey(d)) {
                 int ind = map.get(d).get(0);
-                max = Math.max(max,i-ind);
+                max = d==0?Math.max(max,i+1):Math.max(max,i-ind);
             }
             map.putIfAbsent(d,new ArrayList<>());
             map.get(d).add(i);
