@@ -13,3 +13,10 @@ class Solution {
         return cnt;
     }
 }
+
+
+
+/*
+here m is which part we can delete from current frame of s
+
+*/
