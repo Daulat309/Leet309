@@ -1,39 +1,30 @@
 class Solution {
-    public int[][] insert(int[][] in, int[] nin) {
-        ArrayList<int[]> list = new ArrayList<>();
-        if(in.length==0) list.add(nin);
-        boolean ins = true;
-        for(int i = 0;i<in.length;i++){
-            if(ins&&in[i][0]>=nin[0]){
-                list.add(nin);
-                ins = false;
-            }
-            list.add(in[i]);
-        }
-        if(ins) list.add(nin);
-        return merge(list);
-    }
+    public int[][] insert(int[][] intervals, int[] newInterval) {
 
-    public int[][] merge(ArrayList<int[]> list){
-        ArrayList<int[]> list1 = new ArrayList<>();
-        int s = list.get(0)[0], e = list.get(0)[1];
-        for(int i = 1;i<list.size();i++){
-            if(e>=list.get(i)[0]){
-                e = Math.max(e, list.get(i)[1]);
-            }
-            else{
-                list1.add(new int[]{s,e});
-                s = list.get(i)[0];
-                e = list.get(i)[1];
-            }
+        ArrayList<int[]> ans = new ArrayList<>();
+        int i = 0, n = intervals.length;
+
+        // 1. Add all non-overlapping intervals before newInterval
+        while (i < n && intervals[i][1] < newInterval[0]) {
+            ans.add(intervals[i]);
+            i++;
         }
-        list1.add(new int[]{s,e});
-        int[][] r = new int[list1.size()][2];
-        for(int i = 0;i<list1.size();i++){
-            int[] a = list1.get(i);
-            r[i][0] = a[0];
-            r[i][1] = a[1];
+
+        // 2. Merge overlapping intervals
+        while (i < n && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
         }
-        return r;
+
+        ans.add(newInterval);
+
+        // 3. Add remaining intervals
+        while (i < n) {
+            ans.add(intervals[i]);
+            i++;
+        }
+
+        return ans.toArray(new int[ans.size()][]);
     }
 }
