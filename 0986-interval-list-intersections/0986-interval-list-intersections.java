@@ -16,12 +16,6 @@ class Solution {
             }
         }
 
-        int[][] r = new int[list.size()][2];
-        for(int i = 0;i<list.size();i++){
-            int[] a = list.get(i);
-            r[i][0] = a[0];
-            r[i][1] = a[1];
-        }
-        return r;
+        return list.toArray(new int[list.size()][2]);
     }
 }
