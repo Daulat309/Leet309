@@ -1,34 +1,42 @@
 class Pair{
     char ch;
-    int num;
+    int freq;
 
-    Pair(char ch, int num){
+    Pair(char ch, int freq){
         this.ch = ch;
-        this.num = num;
+        this.freq = freq;
     }
 }
+
 class Solution {
     public String removeDuplicates(String s, int k) {
+
         Stack<Pair> st = new Stack<>();
-        int cnt = 0;
-        for(int i = 0;i<s.length();i++){
-            char c = s.charAt(i);
-            if(!st.isEmpty()&&st.peek().ch==c){
-                if(st.peek().num==k-1) st.pop();
-                else st.peek().num++;
+
+        for(char c : s.toCharArray()){
+
+            if(!st.isEmpty() && st.peek().ch == c){
+
+                st.peek().freq++;
+
+                if(st.peek().freq == k)
+                    st.pop();
+
+            }else{
+                st.push(new Pair(c, 1));
             }
-            else st.push(new Pair(c,1));
         }
+
         StringBuilder sb = new StringBuilder();
+
         while(!st.isEmpty()){
-            char c = st.peek().ch;
-            int l = st.peek().num;
-            while(l>0){
-                sb.append(c);
-                l--;
-            }
-            st.pop();
+
+            Pair p = st.pop();
+
+            for(int i = 0; i < p.freq; i++)
+                sb.append(p.ch);
         }
+
         return sb.reverse().toString();
     }
 }
