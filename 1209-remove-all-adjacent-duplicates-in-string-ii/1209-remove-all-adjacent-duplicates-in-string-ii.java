@@ -30,11 +30,13 @@ class Solution {
         StringBuilder sb = new StringBuilder();
 
         while(!st.isEmpty()){
-
-            Pair p = st.pop();
-
-            for(int i = 0; i < p.freq; i++)
-                sb.append(p.ch);
+            char c = st.peek().ch;
+            int l = st.peek().freq;
+            while(l>0){
+                sb.append(c);
+                l--;
+            }
+            st.pop();
         }
 
         return sb.reverse().toString();
