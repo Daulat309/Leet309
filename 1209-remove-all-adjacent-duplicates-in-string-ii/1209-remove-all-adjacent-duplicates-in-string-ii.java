@@ -17,13 +17,12 @@ class Solution {
             if(!st.isEmpty()) p = st.peek();
             if(!st.isEmpty()&&p.ch==c){
                 if(p.num==k-1){
-                    while(!st.isEmpty()&&st.peek().ch==c){
+                    //while(!st.isEmpty()&&st.peek().ch==c){
                         st.pop();
-                        //if(!st.isEmpty()) p = st.peek();
-                    }
+                    //}
                 }
                 else{
-                    st.push(new Pair(c,p.num+1));
+                    st.peek().num++;
                 }
             }
             else{
@@ -31,8 +30,14 @@ class Solution {
             }
         }
         StringBuilder sb = new StringBuilder();
-        int l = st.size();
-        for(int i = 0;i<l;i++) sb.append(st.pop().ch);
+        //int l = st.size();
+        while(!st.isEmpty()){
+            while(st.peek().num>0){
+                sb.append(st.peek().ch);
+                st.peek().num--;
+            }
+            st.pop();
+        }
         return sb.reverse().toString();
     }
 }
