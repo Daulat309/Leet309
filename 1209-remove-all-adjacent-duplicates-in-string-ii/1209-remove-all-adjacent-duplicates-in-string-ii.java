@@ -21,9 +21,11 @@ class Solution {
         }
         StringBuilder sb = new StringBuilder();
         while(!st.isEmpty()){
-            while(st.peek().num>0){
-                sb.append(st.peek().ch);
-                st.peek().num--;
+            char c = st.peek().ch;
+            int l = st.peek().num;
+            while(l>0){
+                sb.append(c);
+                l--;
             }
             st.pop();
         }
