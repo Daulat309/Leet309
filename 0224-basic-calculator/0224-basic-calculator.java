@@ -15,11 +15,9 @@ class Solution {
                 r += n*sn;
                 n = 0;
                 sn = 1;
-                if(!st.isEmpty()){
-                    r *= st.pop();
-                    r += st.pop();
-                    sn = 1;
-                }
+                r *= st.pop();
+                r += st.pop();
+                sn = 1;
             }
             else if(c=='+'||c=='-'){
                 r += n*sn;
