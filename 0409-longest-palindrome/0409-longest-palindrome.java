@@ -7,7 +7,6 @@ class Solution {
             if(map.get(c)%2==0){
                 single--;
                 cnt++;
-                map.put(c,0);
             }
             else single++;
         }
