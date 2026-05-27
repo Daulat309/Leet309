@@ -11,7 +11,6 @@ class Solution {
             }
             else single++;
         }
-        System.out.println(cnt+"  "+single);
         return single>=1?2*cnt+1:2*cnt;
     }
 }
