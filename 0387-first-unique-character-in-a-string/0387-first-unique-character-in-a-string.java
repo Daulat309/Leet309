@@ -1,8 +1,16 @@
 class Solution {
     public int firstUniqChar(String s) {
-        int[] a = new int[26];
-        for(int i = 0;i<s.length();i++) a[s.charAt(i)-'a']++;
-        for(int i = 0;i<s.length();i++) if(a[s.charAt(i)-'a']==1) return i;
+        LinkedHashMap<Character,Integer> map = new LinkedHashMap<>();
+        HashMap<Character,Integer> map2 = new HashMap<>();
+        for(int i = 0;i<s.length();i++){
+            char ch = s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+            map2.putIfAbsent(ch,i);
+        }
+        System.out.println(map);
+        for(Map.Entry<Character,Integer> e : map.entrySet()){
+            if(e.getValue()==1) return map2.get(e.getKey());
+        }
         return -1;
     }
 }
