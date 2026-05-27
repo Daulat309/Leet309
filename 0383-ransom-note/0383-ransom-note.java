@@ -5,11 +5,13 @@ class Solution {
             map.put(c,map.getOrDefault(c,0)+1);
         }
         for(char c : w.toCharArray()){
-            if(map.containsKey(c)){
-                map.put(c,map.get(c)-1);
-                if(map.get(c)==0) map.remove(c);
+            int freq = map.getOrDefault(c, 0);
+
+            if (freq == 0) {
+                return false;
             }
-            else return false;
+
+            map.put(c, freq - 1);
         }
         return true;
     }
