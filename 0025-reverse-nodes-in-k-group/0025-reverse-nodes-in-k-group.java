@@ -22,8 +22,6 @@ class Solution {
         dm.next = head;
         ListNode prev = dm;
         for(int i = 0;i<r;i++){
-            // prev = dm;
-            //for(int j = 0;j<i*k;j++) prev = prev.next;
             ListNode cur = prev.next;
             for(int p = 0;p<k-1;p++){
                 ListNode next = cur.next;
