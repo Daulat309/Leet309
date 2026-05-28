@@ -1,13 +1,13 @@
 class Solution {
     public int search(int[] nums, int target) {
-        return bS(nums,target,0,nums.length-1);
+        return bs(nums, target, 0, nums.length-1);
     }
 
-    public static int bS(int[] a, int x, int l, int e){
-        if(l>e) return -1;
-        int m = l + (e-l)/2;
+    public int bs(int[] a, int x, int s, int e){
+        if(s>e) return -1;
+        int m = s + (e-s)/2;
         if(a[m]==x) return m;
-        if(a[m]<x) return bS(a,x,m+1,e);
-        return bS(a,x,l,m-1);
+        if(a[m]<x) return bs(a, x, m+1, e);
+        return bs(a, x, s, m-1);
     }
 }
