@@ -21,10 +21,10 @@ class Solution {
         ListNode ls = cur;
 
         for(int i = 0;i<=r-l;i++){
-            ListNode d = cur.next;
+            dm = cur.next;
             cur.next = prev;
             prev = cur;
-            cur = d;
+            cur = dm;
         }
         fs.next = prev;
         ls.next = cur;
