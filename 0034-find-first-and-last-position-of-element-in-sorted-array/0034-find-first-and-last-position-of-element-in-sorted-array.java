@@ -1,38 +1,37 @@
 class Solution {
-    public int[] searchRange(int[] ar, int x) {
-        return new int[]{lb(ar,x),ub(ar,x)};
+    public int[] searchRange(int[] a, int x) {
+        return new int[] {lb(a,x,0,a.length-1),ub(a,x,0,a.length-1)};
     }
 
-    public static int lb(int[] ar, int x){
-        int l = 0;
-        int h = ar.length-1;
-        int ans = -1;
+    public int lb(int[] a, int x,int l, int h){
+        int r = -1;
         while(l<=h){
-            int mid = l + (h-l)/2;
-            if(ar[mid]>x) h = mid-1;
-            else if(ar[mid]<x) l = mid + 1;
+            int m = l + (h-l)/2;
+            if(a[m]<x){
+                l = m + 1;
+            }
             else{
-                ans = mid;
-                h = mid-1;
+                r = m;
+                h = m-1;
             }
         }
-        return ans;
+        //System.out.println(r);
+        return r==-1?-1:a[r]==x?r:-1;
     }
 
-    public static int ub(int[] ar, int x){
-        int l = 0;
-        int h = ar.length-1;
-        int ans = -1;
-
+    public int ub(int[] a, int x, int l, int h){
+        int r = -1;
         while(l<=h){
-            int mid = l + (h-l)/2;
-            if(ar[mid]>x) h = mid-1;
-            else if(ar[mid]<x) l = mid + 1;
+            int m = l + (h-l)/2;
+            if(a[m]<=x){
+                r = m;
+                l = m + 1;
+            }
             else{
-                ans = mid;
-                l = mid+1;
+                h = m-1;
             }
         }
-        return ans;
+        //System.out.println(r);
+        return r==-1?-1:a[r]==x?r:-1;
     }
 }
