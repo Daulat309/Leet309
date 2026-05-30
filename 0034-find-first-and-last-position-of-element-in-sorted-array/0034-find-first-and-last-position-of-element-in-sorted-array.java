@@ -10,28 +10,32 @@ class Solution {
             if(a[m]<x){
                 l = m + 1;
             }
+            else if (a[m]>x) {
+                h = m-1;
+            }
             else{
                 r = m;
                 h = m-1;
             }
         }
-        //System.out.println(r);
-        return r==-1?-1:a[r]==x?r:-1;
+        return r;
     }
 
     public int ub(int[] a, int x, int l, int h){
         int r = -1;
         while(l<=h){
             int m = l + (h-l)/2;
-            if(a[m]<=x){
-                r = m;
+            if(a[m]<x){
                 l = m + 1;
             }
-            else{
+            else if (a[m]>x) {
                 h = m-1;
             }
+            else{
+                r = m;
+                l = m+1;
+            }
         }
-        //System.out.println(r);
-        return r==-1?-1:a[r]==x?r:-1;
+        return r;
     }
 }
