@@ -29,7 +29,7 @@ class Solution {
                 if(node.right!=null) q.offer(node.right);
             }
             list.add(new ArrayList<>(l));
-            l.clear();
+            //l.clear();
         }
         return list;
     }
