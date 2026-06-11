@@ -25,6 +25,6 @@ class Solution {
         in(node.left,list);
         list.add(node.val);
         in(node.right, list);
-        return;
+        //return;
     }
 }
