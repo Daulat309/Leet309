@@ -20,11 +20,10 @@ class Solution {
         return list;
     }
 
-    public void post(TreeNode node,List list){
-        if(node==null) return;
-        post(node.left,list);
-        post(node.right, list);
-        list.add(node.val);
-        return;
+    public void post(TreeNode root,List<Integer> list){
+        if(root == null) return;
+        post(root.left,list);
+        post(root.right,list);
+        list.add(root.val);
     }
 }
