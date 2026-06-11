@@ -20,17 +20,17 @@ class Solution {
         Queue<TreeNode> q = new ArrayDeque<>();
         q.offer(root);
         while(!q.isEmpty()){
-            List<Integer> l = new ArrayList<>();
+            double l = 0;
+            int c = 0;
             int s = q.size();
             while(s-->0){
                 TreeNode node = q.poll();
-                l.add(node.val);
+                l += node.val;
+                c++;
                 if(node.left!=null) q.offer(node.left);
                 if(node.right!=null) q.offer(node.right);
             }
-            double a = 0;
-            for(int i = 0;i<l.size();i++) a += l.get(i);
-            list.add(a/l.size());
+            list.add(l/c);
         }
         return list;
     }
