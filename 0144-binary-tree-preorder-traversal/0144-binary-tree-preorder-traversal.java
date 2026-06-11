@@ -20,11 +20,10 @@ class Solution {
         return list;
     }
 
-    public void pre(TreeNode node,List list){
-        if(node==null) return;
-        list.add(node.val);
-        pre(node.left,list);
-        pre(node.right, list);
-        return;
+    public void pre(TreeNode root, List<Integer> list){
+        if(root==null) return;
+        list.add(root.val);
+        pre(root.left,list);
+        pre(root.right,list);
     }
 }
