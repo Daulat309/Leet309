@@ -32,7 +32,11 @@ class Solution {
                 TreeNode b = q.poll();
                 if(a.left!=null){
                     if(b.left!=null){
-                        if(a.left.val!=b.left.val) return false;
+                        if(a.left.val!=b.left.val) {
+                            return false;
+                        }
+                        p.offer(a.left);
+                        q.offer(b.left);
                     }
                     else return false;
                 }
@@ -45,6 +49,8 @@ class Solution {
                 if(a.right!=null){
                     if(b.right!=null){
                         if(a.right.val!=b.right.val) return false;
+                        p.offer(a.right);
+                        q.offer(b.right);
                     }
                     else return false;
                 }
@@ -54,11 +60,6 @@ class Solution {
                     }
                     else return false;
                 }
-
-                if(a.left!=null) p.offer(a.left);
-                if(a.right!=null) p.offer(a.right);
-                if(b.left!=null) q.offer(b.left);
-                if(b.right!=null) q.offer(b.right);
             }
             
         }
