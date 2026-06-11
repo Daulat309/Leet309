@@ -30,7 +30,7 @@ class Solution {
                 if(node.left!=null) q.offer(node.left);
                 if(node.right!=null) q.offer(node.right);
             }
-            list.add(new ArrayList<>(l));
+            list.add(l);
         }
         return list;
     }
