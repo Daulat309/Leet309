@@ -30,8 +30,7 @@ class Solution {
             }
             double a = 0;
             for(int i = 0;i<l.size();i++) a += l.get(i);
-            double sz = l.size()*1.0;
-            list.add(a/sz);
+            list.add(a/l.size()*1.0);
         }
         return list;
     }
