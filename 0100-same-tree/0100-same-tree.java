@@ -19,7 +19,6 @@ class Solution {
         Queue<TreeNode> q = new ArrayDeque<>();
         if(P==null&&Q==null) return true;
         if(P==null||Q==null) return false;
-        if(P.val!=Q.val) return false;
         p.offer(P);
         q.offer(Q);
 
@@ -30,6 +29,7 @@ class Solution {
             while(m-->0&&n-->0){
                 TreeNode a = p.poll();
                 TreeNode b = q.poll();
+                if(a.val!=b.val) return false;
                 if(a.left!=null){
                     if(b.left!=null){
                         if(a.left.val!=b.left.val) {
