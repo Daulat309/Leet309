@@ -19,8 +19,8 @@ class Solution {
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
-        invert2(root.left);
-        invert2(root.right);
+        invertTree(root.left);
+        invertTree(root.right);
         return root;
     }
 
@@ -28,12 +28,12 @@ class Solution {
     //     if(p!=null) invert2(p);
     //     if(q!=null) invert2(p);
     // }
-    public void invert2(TreeNode root) {
-        if(root==null) return;
-        TreeNode temp = root.left;
-        root.left = root.right;
-        root.right = temp;
-        invert2(root.left);
-        invert2(root.right);
-    }
+    // public void invert2(TreeNode root) {
+    //     if(root==null) return;
+    //     TreeNode temp = root.left;
+    //     root.left = root.right;
+    //     root.right = temp;
+    //     invert2(root.left);
+    //     invert2(root.right);
+    // }
 }
