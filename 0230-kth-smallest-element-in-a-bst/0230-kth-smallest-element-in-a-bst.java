@@ -18,14 +18,15 @@ class Solution {
         Stack<Integer> st = new Stack<>();
         ArrayList<Integer> list = new ArrayList<>();
         kth(root,k,st,list);
-        return list.get(k-1);
+        return list.get(list.size()-k);
     }
 
     public void kth(TreeNode root, int k, Stack<Integer> st, List<Integer> list){
         if(root==null) return;
         st.push(root.val);
-        kth(root.left,k,st,list);
-        list.add(st.pop());
         kth(root.right,k,st,list);
+        list.add(st.pop());
+        kth(root.left,k,st,list);
+       
     }
 }
