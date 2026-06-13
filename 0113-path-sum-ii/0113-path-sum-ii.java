@@ -26,6 +26,8 @@ class Solution {
         l.add(root.val);
         if(root.left==null&&root.right==null){
             if(root.val==x) list.add(new ArrayList<Integer>(l));
+            l.remove(l.size()-1);
+            return;
         }
         check(root.left, x-root.val, list,l);
         check(root.right, x-root.val,list,l);
