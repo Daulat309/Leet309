@@ -28,7 +28,12 @@ class Solution {
         q.push(root);
         if(root.left!=null) add(root.left, list, q);
         int a = q.pop().val;
-        if(!list.isEmpty()) if(a<=list.get(list.size()-1)) is = false;
+        if(!list.isEmpty()) {
+            if(a<=list.get(list.size()-1)){
+                is = false;
+                return;
+            }
+        }
         list.add(a);
         if(root.right!=null) add(root.right, list, q);
     }
