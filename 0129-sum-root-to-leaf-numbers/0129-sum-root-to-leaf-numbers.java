@@ -14,20 +14,19 @@
  * }
  */
 class Solution {
+    int n = 0;
     public int sumNumbers(TreeNode root) {
-        List<Integer> l = new ArrayList<>();
-        l.add(0);
-        check(root,0, l);
-        return l.get(0);
+        check(root,0);
+        return n;
     }
-    public void check(TreeNode root, int x, List<Integer> l){
+    public void check(TreeNode root, int x){
         if(root==null) return;
         x = x*10 + root.val;
         if(root.left==null&&root.right==null){
-            l.set(0,l.get(0)+x);
+            n += x;
             return;
         }
-        check(root.left,x,l);
-        check(root.right,x,l);
+        check(root.left,x);
+        check(root.right,x);
     }
 }
