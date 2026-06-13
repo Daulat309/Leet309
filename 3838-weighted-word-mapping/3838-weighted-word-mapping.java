@@ -5,7 +5,7 @@ class Solution {
             int sm = 0;
             for(int i = 0;i<s.length();i++) sm += weights[s.charAt(i)-'a'];
             sm %= 26;
-            sb.append((char)(122-sm));
+            sb.append((char)('a'+25-sm));
         }
         return sb.toString();
     }
