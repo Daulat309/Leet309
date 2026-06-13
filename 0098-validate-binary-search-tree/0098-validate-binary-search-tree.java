@@ -18,16 +18,14 @@ class Solution {
     public boolean isValidBST(TreeNode root) {
         if(root==null) return true;
         ArrayList<Integer> list = new ArrayList<>();
-        Stack<TreeNode> q = new Stack<>();
-        add(root,list,q);
+        add(root,list);
         System.out.println(list);
         return is;
     }
 
-    public void add(TreeNode root, ArrayList<Integer> list, Stack<TreeNode> q){
-        q.push(root);
-        if(root.left!=null) add(root.left, list, q);
-        int a = q.pop().val;
+    public void add(TreeNode root, ArrayList<Integer> list){
+        if(root.left!=null) add(root.left, list);
+        int a = root.val;
         if(!list.isEmpty()) {
             if(a<=list.get(list.size()-1)){
                 is = false;
@@ -35,6 +33,6 @@ class Solution {
             }
         }
         list.add(a);
-        if(root.right!=null) add(root.right, list, q);
+        if(root.right!=null) add(root.right, list);
     }
 }
