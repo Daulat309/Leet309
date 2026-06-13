@@ -15,19 +15,19 @@
  */
 class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        int[] is = new int[2];
-        check(root, targetSum, is);
-        return is[1]==1;
+        return dfs(root, 0, targetSum);
     }
 
-    public void check(TreeNode root, int x, int[] is){
-        if(root==null) return;
-        is[0] += root.val;
-        if(root.left==null&&root.right==null){
-            if(is[0]==x) is[1] = 1;
+    private boolean dfs(TreeNode node, int sum, int target) {
+        if (node == null) return false;
+
+        sum += node.val;
+
+        if (node.left == null && node.right == null) {
+            return sum == target;
         }
-        check(root.left, x, is);
-        check(root.right, x, is);
-        is[0] -= root.val;
+
+        return dfs(node.left, sum, target) ||
+               dfs(node.right, sum, target);
     }
 }
