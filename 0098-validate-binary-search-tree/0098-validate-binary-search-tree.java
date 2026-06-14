@@ -15,24 +15,25 @@
  */
 class Solution {
     boolean is = true;
+    TreeNode prev = null;
     public boolean isValidBST(TreeNode root) {
         if(root==null) return true;
         ArrayList<Integer> list = new ArrayList<>();
-        add(root,list);
+        
+        check(root);
         System.out.println(list);
         return is;
     }
 
-    public void add(TreeNode root, ArrayList<Integer> list){
-        if(root.left!=null) add(root.left, list);
-        int a = root.val;
-        if(!list.isEmpty()) {
-            if(a<=list.get(list.size()-1)){
+    public void check(TreeNode root){
+        if(root.left!=null)check(root.left);
+        if(prev!=null){
+            if(root.val<=prev.val){
                 is = false;
                 return;
             }
         }
-        list.add(a);
-        if(root.right!=null) add(root.right, list);
+        prev = root;
+        if(root.right!=null) check(root.right);
     }
 }
