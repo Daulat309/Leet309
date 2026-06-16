@@ -3,18 +3,17 @@ class Solution {
         int[] a = new int[2];
         a[0] = lb(ar,0,ar.length-1,x);
         if(a[0]!=-1) a[0]= ar[a[0]]==x?a[0]:-1;
-        a[1] = a[0]==-1?-1:ub(ar,0,ar.length-1,x,ar.length) - 1;
+        a[1] = a[0]==-1?-1:ub(ar,0,ar.length-1,x) - 1;
         return a;
     }
 
-    public int ub(int[] a, int l, int h, int x,int ub){
-        if(l>h) return ub;
+    public int ub(int[] a, int l, int h, int x){
+        if(l>h) return l;
         int m = l + (h-l)/2;
         if(a[m]>x){
-            ub = m;
-            return ub(a, l, m-1, x, ub);
+            return ub(a, l, m-1, x);
         }
-        return ub(a, m+1, h, x, ub);
+        return ub(a, m+1, h, x);
     }
 
     public int lb(int[] a, int l, int h, int x){
