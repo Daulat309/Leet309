@@ -12,21 +12,18 @@ class Solution {
     boolean is = true;
     ListNode cur = new ListNode();
     public boolean isPalindrome(ListNode head) {
-        int n = 0;
-        cur = head;
-        ListNode fs = head;
-        while(cur!=null){
-            n++;
-            cur = cur.next;
-        }
-        cur = head;
-        n = n/2;
-        while(n-->0){
+        ListNode dum = new ListNode(0);
+        dum.next= head;
+        ListNode fs = dum;
+        cur = dum;
+        while(cur!=null&&cur.next!=null){
             fs = fs.next;
+            cur = cur.next.next;
         }
+        if(cur!=null) fs = fs.next;
+        cur = head;
         check(fs);
         return is;
-        
     }
 
     public void check(ListNode fs){
