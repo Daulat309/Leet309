@@ -1,40 +1,47 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
-    boolean is = true;
-    ListNode cur = new ListNode();
     public boolean isPalindrome(ListNode head) {
-        ListNode dum = new ListNode(0);
-        dum.next= head;
-        ListNode fs = dum;
-        cur = dum;
-        while(cur!=null&&cur.next!=null){
-            fs = fs.next;
-            cur = cur.next.next;
+        if (head == null || head.next == null) return true;
+
+        // Find middle
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        if(cur!=null) fs = fs.next;
-        cur = head;
-        check(fs);
-        return is;
+
+        // Skip middle node for odd length
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        // Reverse second half
+        ListNode secondHalf = reverse(slow);
+        ListNode firstHalf = head;
+
+        // Compare both halves
+        while (secondHalf != null) {
+            if (firstHalf.val != secondHalf.val) {
+                return false;
+            }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+
+        return true;
     }
 
-    public void check(ListNode fs){
-            if(cur==fs) return;
-            if(fs==null) return;
-            check(fs.next);
-            System.out.println(fs.val+"  "+cur.val);
-            if(cur.val!=fs.val){
-                is = false;
-                return;
-            }
-            cur = cur.next;
+    private ListNode reverse(ListNode head) {
+        ListNode prev = null;
+
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
         }
+
+        return prev;
+    }
 }
