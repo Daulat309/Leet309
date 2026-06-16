@@ -1,41 +1,28 @@
 class Solution {
-    public int[] searchRange(int[] a, int x) {
-        return new int[] {lb(a,x,0,a.length-1),ub(a,x,0,a.length-1)};
+    public int[] searchRange(int[] ar, int x) {
+        int[] a = new int[2];
+        a[0] = lb(ar,0,ar.length-1,x);
+        if(a[0]!=-1) a[0]= ar[a[0]]==x?a[0]:-1;
+        a[1] = a[0]==-1?-1:ub(ar,0,ar.length-1,x,ar.length) - 1;
+        return a;
     }
 
-    public int lb(int[] a, int x,int l, int h){
-        int r = -1;
-        while(l<=h){
-            int m = l + (h-l)/2;
-            if(a[m]<x){
-                l = m + 1;
-            }
-            else if (a[m]>x) {
-                h = m-1;
-            }
-            else{
-                r = m;
-                h = m-1;
-            }
+    public int ub(int[] a, int l, int h, int x,int ub){
+        if(l>h) return ub;
+        int m = l + (h-l)/2;
+        if(a[m]>x){
+            ub = m;
+            return ub(a, l, m-1, x, ub);
         }
-        return r;
+        return ub(a, m+1, h, x, ub);
     }
 
-    public int ub(int[] a, int x, int l, int h){
-        int r = -1;
-        while(l<=h){
-            int m = l + (h-l)/2;
-            if(a[m]<x){
-                l = m + 1;
-            }
-            else if (a[m]>x) {
-                h = m-1;
-            }
-            else{
-                r = m;
-                l = m+1;
-            }
+    public int lb(int[] a, int l, int h, int x){
+        if(l>h) return l==a.length?-1:l;
+        int m = l + (h-l)/2;
+        if(a[m]>=x){
+            return lb(a, l, m-1, x);
         }
-        return r;
+        return lb(a, m+1, h, x);
     }
 }
