@@ -9,10 +9,10 @@ class Solution {
                 else l = m + 1;
             }
             else{
-                if(x<=a[a.length-1]){
+                if(x<=a[a.length-1])
+                {
                     if(x<a[m]) h = m-1;
                     else l = m+1;
-
                 }
                 else h = m - 1;
             }
