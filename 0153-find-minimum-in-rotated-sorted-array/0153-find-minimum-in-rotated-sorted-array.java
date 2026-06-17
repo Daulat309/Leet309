@@ -1,17 +1,15 @@
 class Solution {
-    public int findMin(int[] nums) {
-        int i = (pk(nums) + 1 )%nums.length;
-        return nums[i];
-    }
-
-
-    public int pk(int[] a){
+    public int findMin(int[] a) {
+        int r = 0;
         int l = 0, h = a.length-1;
-        while(l<h){
+        while(l<=h){
             int m = l + (h-l)/2;
-            if(a[m]>a[h]) l = m+1;
-            else h = m;
+            if(a[m]<=a[a.length-1]){
+                r = m;
+                h = m-1;
+            }
+            else l = m + 1;
         }
-        return (l - 1 + a.length)%a.length;
+        return a[r];
     }
 }
