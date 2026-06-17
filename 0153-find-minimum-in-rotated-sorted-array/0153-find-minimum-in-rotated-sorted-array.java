@@ -10,6 +10,6 @@ class Solution {
             }
             else l = m + 1;
         }
-        return a[r];
+        return a[l];
     }
 }
