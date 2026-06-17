@@ -3,8 +3,8 @@ class Solution {
         int l = 0, h= a.length-1;
         while(l<h){
             int m = l + (h-l)/2;
-            if(a[m]>a[m+1]) h--;
-            else l++;
+            if(a[m]>a[m+1]) h = m;
+            else l = m+1;
         }
         return l;
     }
