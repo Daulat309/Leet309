@@ -10,8 +10,8 @@ class Solution {
             for(int i = 0;i<c.length;i++){
                 cur += c[i]/m;
             }
-            if((cur/k)>0){
-                r = (cur/k)*m;
+            if(cur>=k){
+                r = m;
                 l = m + 1;
             }
             else h = m-1;
