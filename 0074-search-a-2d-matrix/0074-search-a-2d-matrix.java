@@ -1,12 +1,15 @@
 class Solution {
     public boolean searchMatrix(int[][] a, int x) {
-        if(a[0][0]<=x&&x<=a[a.length-1][a[0].length-1]){
-            int r = 0, c = a[0].length-1;
-            while(r<a.length&&c>=0){
-                if(a[r][c]==x) return true;
-                if(a[r][c]>x) c--;
-                else r++;
+        int l = 0, h = a.length*a[0].length-1;
+        while(l<=h){
+            int m = l + (h-l)/2;
+            int i = m/a[0].length;
+            int j = m%a[0].length;
+            if(a[i][j]==x) return true;
+            if(a[i][j]>x){
+                h = m-1;
             }
+            else l = m + 1;
         }
         return false;
     }
