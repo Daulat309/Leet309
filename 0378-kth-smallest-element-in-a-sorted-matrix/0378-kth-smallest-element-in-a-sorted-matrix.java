@@ -20,10 +20,7 @@ class Solution {
         int c = a[0].length-1;
         while(r<a.length&&c>=0){
             if(a[r][c]<=x){
-                if(cnt==0){
-                    cnt = (c+1)*(r+1);
-                }
-                else cnt += c+1;
+                cnt += c+1;
                 r++;
             }
             else c--;
