@@ -20,8 +20,8 @@ class Solution {
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
         }
 
-        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
-            q.offer(entry.getKey());
+        for(Integer key : map.keySet()){
+            q.offer(key);
             if(q.size()>k){
                 q.poll();
             }
