@@ -18,11 +18,8 @@ class Solution {
         }
         List<String> list = new ArrayList<>();
         while(!q.isEmpty()){
-            System.out.println(q.peek()+"  -> "+map.get(q.peek()));
-            list.add(q.poll());
+            list.add(0,q.poll());
         }
-        System.out.println(list);
-        Collections.reverse(list);
         return list;
     }
 }
