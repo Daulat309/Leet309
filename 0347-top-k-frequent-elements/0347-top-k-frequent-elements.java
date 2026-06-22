@@ -12,20 +12,25 @@ class Solution {
         HashMap<Integer, Integer> map = new HashMap<>();
         Queue<Pair> q = new PriorityQueue<>(
             (a,b) -> {
-                return b.s - a.s;
+                return a.s - b.s;
             }
         );
 
         for(int i = 0;i<nums.length;i++){
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
         }
+        int n = k;
 
         for(Map.Entry<Integer,Integer> entry : map.entrySet()){
             q.offer(new Pair(entry.getKey(),entry.getValue()));
+            n--;
+            if(n<0){
+                q.poll();
+            }
         }
         int[] a = new int[k];
         int i = 0;
-        while(i!=k&&!q.isEmpty()){
+        while(!q.isEmpty()){
             a[i] = q.peek().f;
             q.poll();
             i++;
