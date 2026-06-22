@@ -1,11 +1,25 @@
 class Solution {
     public int thirdMax(int[] nums) {
+        Queue<Integer> q = new PriorityQueue<>();
+        int k = 3;
         HashSet<Integer> set = new HashSet<>();
-        for (int i : nums) set.add(i);
-        int[] arr = set.stream().mapToInt(Integer::intValue).toArray();
-        Arrays.sort(arr);
-        int n = arr.length;
-        if (n < 3) return arr[n - 1];
-        return arr[n - 3];
+
+        int mx = Integer.MIN_VALUE;
+        for(int i : nums){
+            if(!set.contains(i)){
+                System.out.println(i);
+                q.offer(i);
+                set.add(i);
+                k--;
+            }
+            mx = Math.max(i,mx);
+            if(k<0){
+                q.poll();
+                k++;
+            }
+            System.out.println(q.peek());
+        }
+        System.out.println(q.peek());
+        return k>0?mx:q.poll();
     }
 }
