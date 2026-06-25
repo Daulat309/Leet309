@@ -13,7 +13,6 @@ class Solution {
                 }
                 if(sm>x) h--;
                 else l++;
-                //else return sm;
             }
         }
         return s;
