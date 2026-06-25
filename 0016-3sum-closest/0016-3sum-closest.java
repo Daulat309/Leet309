@@ -12,8 +12,8 @@ class Solution {
                     s = sm;
                 }
                 if(sm>x) h--;
-                else if(sm<x) l++;
-                else return sm;
+                else l++;
+                //else return sm;
             }
         }
         return s;
