@@ -8,8 +8,8 @@ class Solution {
             int l = i + 1, h = n.length-1;
             while(l<h){
                 int sm = n[i]+n[l]+n[h];
+                if(sm==x) return sm;
                 if(Math.abs(s-x)>Math.abs(sm-x)){
-                    if(sm==x) return sm;
                     s = sm;
                 }
                 if(sm>x) h--;
