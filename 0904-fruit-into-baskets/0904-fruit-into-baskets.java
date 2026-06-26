@@ -1,19 +1,29 @@
 class Solution {
-    public int totalFruit(int[] fr) {
-        HashMap<Integer, Integer> freq = new HashMap<>();
-        int l = 0, h = 0, mxc = 0;
-        while(h<fr.length){
-            int c = fr[h];
-            freq.put(c,freq.getOrDefault(c,0)+1);
-            while(freq.size()>2){
-                int ch = fr[l];
-                freq.put(ch,freq.get(ch)-1);
-                if(freq.get(ch)==0) freq.remove(ch);
-                l++;
+    public int totalFruit(int[] f) {
+        int t1 = f[0], t2 = -1,cnt = 0, mx = 0;
+        int past = 0;
+        int h = 0;
+        while(h<f.length){
+            if(f[h]==t1||f[h]==t2){
+                cnt++;
+                if(f[h]!=f[past]) past = h;
             }
-            if(freq.size()<=2) mxc = Math.max(mxc,h-l+1);
+            else{
+                if(t2==-1){
+                    t2 = f[h];
+                    cnt++;
+                    past = h;
+                }
+                else{
+                    t1 = f[past];
+                    t2 = f[h];
+                    cnt = h - past + 1;
+                    past = h;
+                }
+            }
+            mx = Math.max(cnt, mx);
             h++;
         }
-        return mxc;
+        return mx;
     }
 }
