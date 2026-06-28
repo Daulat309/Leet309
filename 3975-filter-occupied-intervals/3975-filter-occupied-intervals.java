@@ -5,7 +5,7 @@ class Solution {
         int e = o[0][1];
         List<List<Integer>> list = new ArrayList<>();
         for(int i = 1;i<o.length;i++){
-            if(o[i][0]<=e) e = Math.max(o[i][1],e);
+            if(o[i][0]<=e+1) e = Math.max(o[i][1],e);
             else{
                 list.add(Arrays.asList(s,e));
                 s = o[i][0];
@@ -34,18 +34,18 @@ class Solution {
         }
         list.clear();
         System.out.println(ad);
-        if(ad.size()==0) return list;
-        s = ad.get(0).get(0);
-        e = ad.get(0).get(1);
-        for(int i = 1;i<ad.size();i++){
-            if(e+1==ad.get(i).get(0)) e = ad.get(i).get(1);
-            else{
-                list.add(Arrays.asList(s,e));
-                s = ad.get(i).get(0);
-                e = ad.get(i).get(1);
-            }
-        }
-        list.add(Arrays.asList(s,e));
-        return list;
+        // if(ad.size()==0) return list;
+        // s = ad.get(0).get(0);
+        // e = ad.get(0).get(1);
+        // for(int i = 1;i<ad.size();i++){
+        //     if(e+1==ad.get(i).get(0)) e = ad.get(i).get(1);
+        //     else{
+        //         list.add(Arrays.asList(s,e));
+        //         s = ad.get(i).get(0);
+        //         e = ad.get(i).get(1);
+        //     }
+        // }
+        // list.add(Arrays.asList(s,e));
+        return ad;
     }
 }
