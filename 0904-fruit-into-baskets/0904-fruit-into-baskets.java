@@ -1,34 +1,15 @@
 class Solution {
     public int totalFruit(int[] fruits) {
-        int cnt = 1, l = 0, h = 1, mx = 1,a = -1, b = fruits[l];
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int l = 0, h = 0, mx = 0;
         while(h<fruits.length){
-            int k = fruits[h];
-            if(k==b){
-                cnt++;
+            map.put(fruits[h],map.getOrDefault(fruits[h],0)+1);
+            while(map.size()>2){
+                map.put(fruits[l],map.get(fruits[l])-1);
+                if(map.get(fruits[l])==0) map.remove(fruits[l]);
+                l++;
             }
-            else{
-                if(k==a){
-                    l = h;
-                    cnt++;
-                    a = b;
-                    b = k;
-                }
-                else{
-                    if(a==-1){
-                        a = b;
-                        b = k;
-                        l = h;
-                        cnt++;
-                    }
-                    else{
-                        cnt = h - l + 1;
-                        a = b;
-                        b = k;
-                        l = h;
-                    }
-                }
-            }
-            mx = Math.max(mx,cnt);
+            mx = Math.max(h-l+1,mx);
             h++;
         }
         return mx;
