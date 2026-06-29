@@ -8,10 +8,10 @@ class Solution {
         }while(sl!=fs);
         System.out.println(sl);
         sl = 0;
-        while(nums[fs]!=nums[sl]){
+        while(fs!=sl){
             fs = nums[fs];
             sl = nums[sl];
         }
-        return nums[sl];
+        return sl;
     }
 }
