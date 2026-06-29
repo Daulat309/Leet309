@@ -1,33 +1,41 @@
 class Solution {
-    public int[] sortedSquares(int[] a) {
-        int s = 0;
-        for(int i = 0;i<a.length-1;i++){
-            if(Math.abs(a[i])>Math.abs(a[i+1])) s = i+1;
+    public int[] sortedSquares(int[] nums) {
+        int vally = nums.length;
+        int[] a = new int[nums.length];
+        for(int i = 1;i<nums.length;i++){
+            if(Math.abs(nums[i-1])<Math.abs(nums[i])){
+                vally = i-1;
+                break;
+            }
         }
-        int e = s-1;
-        int[] r = new int[a.length];
+        int l = vally - 1, h = vally;
         int i = 0;
-        while(s<a.length&&e>=0){
-            if(Math.abs(a[s])<Math.abs(a[e])){
-                r[i] = a[s]*a[s];
-                s++;
+        while(l>=0&&h<a.length){
+            if(Math.abs(nums[l])>Math.abs(nums[h])){
+                a[i] = nums[h]*nums[h];
+                h++;
             }
             else{
-                r[i] = a[e]*a[e];
-                e--;
+                a[i] = nums[l]*nums[l];
+                l--;
             }
             i++;
         }
-        while(e>=0){
-                r[i] = a[e]*a[e];
-                e--;
+
+        while(h<a.length){
+            
+                a[i] = nums[h]*nums[h];
+                h++;
+            
+            i++;
+        }
+
+        while(l>=0){
+            
+                a[i] = nums[l]*nums[l];
+                l--;
                 i++;
         }
-        while(s<a.length){
-                r[i] = a[s]*a[s];
-                s++;
-                i++;
-        }
-        return r;
+        return a;
     }
 }
