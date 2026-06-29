@@ -1,13 +1,12 @@
 class Solution {
-    public int maximumSum(int[] a) {
-        int od = 0;
-        int nd = a[0];
-        int h = 1,mx = a[0];
-        while(h<a.length){
-            od = Math.max(a[h]+od, nd);
-            nd = Math.max(nd+a[h],a[h]);
-            mx = Math.max(mx,Math.max(od,nd));
-            h++;
+    public int maximumSum(int[] arr) {
+        int od = arr[0];
+        int nd  = arr[0];
+        int mx = Math.max(od,nd);
+        for(int i = 1;i<arr.length;i++){
+            od = Math.max(nd,od+arr[i]);
+            nd = Math.max(arr[i],nd+arr[i]);
+            mx = Math.max(mx,Math.max(nd,od));
         }
         return mx;
     }
