@@ -1,28 +1,27 @@
 class Solution {
     public String minWindow(String s, String t) {
-        int[] r = new int[256];
-        int[] ex = new int[256];
-        for(int i = 0;i<t.length();i++) r[t.charAt(i)]++;
-        int l = 0, h = 0, mnl = Integer.MAX_VALUE;
+        int[] freq = new int[256];
+        int l = 0, h = 0, rq = t.length(), mn = Integer.MAX_VALUE;
         String S = "";
+        for(char c : t.toCharArray()) freq[c]++;
         while(h<s.length()){
-            ex[s.charAt(h)]++;
-            while(isit(r,ex)){
-                String cur = s.substring(l,h+1);
-                if(cur.length()<mnl){
-                    S = cur;
-                    mnl = cur.length();
+            if(freq[s.charAt(h)]>0){
+                rq--;
+            }
+            freq[s.charAt(h)]--;
+            while(rq==0){
+                if(h - l + 1< mn){
+                    S = s.substring(l,h+1);
+                    mn = h - l + 1;
                 }
-                ex[s.charAt(l)]--;
+                freq[s.charAt(l)]++;
+                if(freq[s.charAt(l)]>0){
+                   rq++;
+                }
                 l++;
             }
             h++;
         }
         return S;
-    }
-
-    public static boolean isit(int[] r,int[] ex){
-        for(int i = 0;i<256;i++) if(r[i]>ex[i]) return false;
-        return true;
     }
 }
