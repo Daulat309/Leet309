@@ -1,27 +1,34 @@
 class Solution {
-    public int totalFruit(int[] f) {
-        int t1 = f[0], t2 = -1,cnt = 0, mx = 0;
-        int past = 0;
-        int h = 0;
-        while(h<f.length){
-            if(f[h]==t1||f[h]==t2){
+    public int totalFruit(int[] fruits) {
+        int cnt = 1, l = 0, h = 1, mx = 1,a = -1, b = fruits[l];
+        while(h<fruits.length){
+            int k = fruits[h];
+            if(k==b){
                 cnt++;
-                if(f[h]!=f[past]) past = h;
             }
             else{
-                if(t2==-1){
-                    t2 = f[h];
+                if(k==a){
+                    l = h;
                     cnt++;
-                    past = h;
+                    a = b;
+                    b = k;
                 }
                 else{
-                    t1 = f[past];
-                    t2 = f[h];
-                    cnt = h - past + 1;
-                    past = h;
+                    if(a==-1){
+                        a = b;
+                        b = k;
+                        l = h;
+                        cnt++;
+                    }
+                    else{
+                        cnt = h - l + 1;
+                        a = b;
+                        b = k;
+                        l = h;
+                    }
                 }
             }
-            mx = Math.max(cnt, mx);
+            mx = Math.max(mx,cnt);
             h++;
         }
         return mx;
