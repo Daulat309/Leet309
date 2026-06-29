@@ -1,12 +1,11 @@
 class Solution {
-    public int[] twoSum(int[] n, int x) {
-        int l = 0, h = n.length-1;
-        while(l<h){
-            int s = n[l]+n[h];
-            if(s==x) return new int[]{l+1,h+1};
-            if(s<x)l++;
-            else h--;
+    public int[] twoSum(int[] numbers, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0;i<numbers.length;i++){
+            int r = target - numbers[i];
+            if(map.containsKey(r)) return new int[]{map.get(r)+1,i+1};
+            map.put(numbers[i],i);
         }
-        return new int[]{-1,-1};
+        return  new int[]{-1,-1};
     }
 }
