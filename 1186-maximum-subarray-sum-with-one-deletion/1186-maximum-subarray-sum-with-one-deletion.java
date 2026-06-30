@@ -1,13 +1,14 @@
 class Solution {
-    public int maximumSum(int[] arr) {
-        int od = arr[0];
-        int nd  = arr[0];
-        int mx = Math.max(od,nd);
-        for(int i = 1;i<arr.length;i++){
-            od = Math.max(nd,od+arr[i]);
-            nd = Math.max(arr[i],nd+arr[i]);
-            mx = Math.max(mx,Math.max(nd,od));
+    public int maximumSum(int[] nums) {
+        int nd = nums[0];
+        int od = nums[0];
+        int res = nums[0];
+        for(int i = 1;i<nums.length;i++){
+            if(od==nd) od = Math.max(od,nums[i]);
+            else od = Math.max(nd,od+nums[i]);
+            nd = Math.max(nums[i],nd+nums[i]);
+            res = Math.max(res,Math.max(nd,od));
         }
-        return mx;
+        return res;
     }
 }
