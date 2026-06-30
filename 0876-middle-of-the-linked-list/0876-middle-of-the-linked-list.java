@@ -13,7 +13,7 @@ class Solution {
         ListNode slow = head;
         ListNode fast = head;
 
-        // Detect cycle
+        // flaf if reach null
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
@@ -22,3 +22,6 @@ class Solution {
         return slow;
     }
 }
+
+
+// Fast runs twice speed of slow ; for even, loop stops at fast != null & for odd, loop stops at fast.next != null
