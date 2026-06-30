@@ -6,7 +6,7 @@ class Solution {
             if(a[m]<=a[a.length-1]){
                 h = m-1;
             }
-            else l = m + 1;
+            else l = m+1;
         }
         return a[l];
     }
