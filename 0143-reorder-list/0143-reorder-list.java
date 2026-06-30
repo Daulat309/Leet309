@@ -10,15 +10,18 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        ListNode fs = head;
+        //Find middle
+
         ListNode sl = head;
+        ListNode fs = head;
         while(fs!=null&&fs.next!=null){
-            fs = fs.next.next;
             sl = sl.next;
+            fs = fs.next.next;
         }
 
-        ListNode prev = null;
+        //reverse second halve
         fs = sl.next;
+        ListNode prev = null;
         sl.next = null;
         while(fs!=null){
             ListNode next = fs.next;
@@ -26,19 +29,20 @@ class Solution {
             prev = fs;
             fs = next;
         }
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode cur = dummy;
-        fs = head;
-        while(prev!=null&&fs!=null){
-            cur.next = fs;
-            cur = cur.next;
-            fs = fs.next;
-            cur.next = prev;
-            cur = cur.next;
-            prev = prev.next;
+
+        //Mer Alternatively
+
+        sl = head;
+        fs = prev;
+        while(fs!=null){
+            ListNode first = sl.next;
+            ListNode second = fs.next;
+
+            sl.next = fs;
+            fs.next = first;
+
+            sl = first;
+            fs = second;
         }
-        cur.next = fs==null? prev : fs;
-        head = dummy.next;
     }
 }
