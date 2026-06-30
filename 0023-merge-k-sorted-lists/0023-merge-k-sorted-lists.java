@@ -10,7 +10,7 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        if(lists.length<1) return null;
+        if(lists.length==0) return null;
         int diff = 1;
         while(diff<lists.length){
             for(int i = 0;i+diff<lists.length;i += diff*2){
