@@ -22,37 +22,37 @@ class Solution {
         ListNode sl = list;
         ListNode fs = list;
         boolean cycle = false;
-        while(fs!=null&&fs.next!=null){
-            fs = fs.next.next;
-            sl = sl.next;
-            if(sl==fs){
-                cycle = true;
-                break;
-            };
-        }
-        if(!cycle){
+        // while(fs!=null&&fs.next!=null){
+        //     fs = fs.next.next;
+        //     sl = sl.next;
+        //     if(sl==fs){
+        //         cycle = true;
+        //         break;
+        //     };
+        // }
+        ///if(!cycle){
             while(list!=null){
             min.offer(new ListNode(list.val));
             list = list.next;
             }
-        }
-        else{
-            sl = list;
-            while(sl!=fs){
-                sl = sl.next;
-                fs = fs.next;
-            }
-            while(sl!=fs){
-            min.offer(new ListNode(sl.val));
-            sl = sl.next;
-            }
-            min.offer(sl);
-            sl = sl.next;
-            while(sl!=fs){
-            min.offer(new ListNode(sl.val));
-            sl = sl.next;
-            }
-        }
+        //}
+        // else{
+        //     sl = list;
+        //     while(sl!=fs){
+        //         sl = sl.next;
+        //         fs = fs.next;
+        //     }
+        //     while(sl!=fs){
+        //     min.offer(new ListNode(sl.val));
+        //     sl = sl.next;
+        //     }
+        //     min.offer(sl);
+        //     sl = sl.next;
+        //     while(sl!=fs){
+        //     min.offer(new ListNode(sl.val));
+        //     sl = sl.next;
+        //     }
+        // }
         
         i++;
         }
