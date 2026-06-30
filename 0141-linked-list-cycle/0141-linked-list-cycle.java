@@ -11,12 +11,13 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        ListNode rabit = head;
         ListNode turtle = head;
-        while(rabit!=null&&rabit.next!=null){
-            rabit = rabit.next.next;
+        ListNode rabbit = head;
+        while(rabbit!=null&&rabbit.next!=null){
             turtle = turtle.next;
-            if(rabit==turtle) return true;
+            rabbit = rabbit.next;
+            rabbit = rabbit.next;
+            if(rabbit==turtle) return true;
         }
         return false;
     }
