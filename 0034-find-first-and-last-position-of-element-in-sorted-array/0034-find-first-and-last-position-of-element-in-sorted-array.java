@@ -1,27 +1,33 @@
 class Solution {
-    public int[] searchRange(int[] ar, int x) {
-        int[] a = new int[2];
-        a[0] = lb(ar,0,ar.length-1,x);
-        if(a[0]!=-1) a[0]= ar[a[0]]==x?a[0]:-1;
-        a[1] = a[0]==-1?-1:ub(ar,0,ar.length-1,x) - 1;
-        return a;
+    public int[] searchRange(int[] nums, int target) {
+        int lb = fo(nums,target);
+        int ub = lo(nums,target);
+        return lb!=-1?new int[]{lb,ub}:new int[]{-1,-1};
     }
 
-    public int ub(int[] a, int l, int h, int x){
-        if(l>h) return l;
-        int m = l + (h-l)/2;
-        if(a[m]>x){
-            return ub(a, l, m-1, x);
+
+    public int fo(int[] a,int x){
+        int l = 0, h = a.length-1;
+        while(l<=h){
+            int m = l + (h-l)/2;
+            if(a[m]>=x){
+                h = m - 1;
+            }
+            else l = m + 1;
         }
-        return ub(a, m+1, h, x);
+        return l == a.length||a[l]!=x?-1:l;
     }
 
-    public int lb(int[] a, int l, int h, int x){
-        if(l>h) return l==a.length?-1:l;
-        int m = l + (h-l)/2;
-        if(a[m]>=x){
-            return lb(a, l, m-1, x);
+    public int lo(int[] a,int x){
+        int l = 0, h = a.length-1;
+        while(l<=h){
+            int m = l + (h-l)/2;
+            if(a[m]<=x){
+                l = m + 1;
+            }
+            else h = m - 1;
         }
-        return lb(a, m+1, h, x);
+        return h;
     }
+
 }
