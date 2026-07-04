@@ -1,22 +1,24 @@
 class Solution {
     public int maximumCandies(int[] c, long k) {
-        long l = 1, h = Integer.MIN_VALUE;
-        long r = 0;
-        for(int i : c) h = Math.max(h,i);
-        long mx = h;
+        int l = 0, h = l,res = 0;
+        for(int i : c) h = Math.max(i,h);
         while(l<=h){
-            long m = l + (h-l)/2;
-            long cur = 0;
-            for(int i = 0;i<c.length;i++){
-                cur += c[i]/m;
-            }
-            if(cur>=k){
-                r = m;
+            int m = l + (h-l)/2;
+            if(isp(c,m,k)){
+                res = m;
                 l = m + 1;
             }
-            else h = m-1;
+            else h = m - 1;
         }
-        r = Math.min(mx,r);
-        return (int)r;
+        return res;
+    }
+
+    public boolean isp(int[] a, int c, long k){
+        long cnt = 0;
+        if(c==0) return true;
+        for(int i = 0;i<a.length;i++){
+            cnt += a[i]/c;
+        }
+        return cnt>=k;
     }
 }
