@@ -10,7 +10,7 @@ class Solution {
             }
             else h = m - 1;
         }
-        return res;
+        return h;
     }
 
     public boolean isp(int[] a, int c, long k){
