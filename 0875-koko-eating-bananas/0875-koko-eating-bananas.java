@@ -1,13 +1,13 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        long mn = 1,mx = mn;
+        int mn = 1, mx = mn;
         for(int i = 0;i<piles.length;i++) mx = Math.max(piles[i],mx);
         while(mn<=mx){
-            long m  = mn + (mx-mn)/2;
+            int m  = mn + (mx-mn)/2;
             if(check(piles, m, h)) mx = m - 1;
             else mn = m + 1;
         }
-        return (int)mn;
+        return mn;
     }
 
     public boolean check(int[] p, long m, long h){
