@@ -1,26 +1,36 @@
 class Solution {
-    public int minDays(int[] bld, int m, int k) {
-        if(bld.length<m*k) return -1;
-        int mx = Integer.MIN_VALUE;
-        for(int i : bld) mx = Math.max(mx,i);
-        int l = 1, h = mx, rs = -1;
-        while(l<=h){
-            int md = l + (h-l)/2;
-            int fin = 0, cur = 0;
-            for(int i = 0;i<bld.length;i++){
-                if(bld[i]<=md) cur++;
-                else cur = 0;
+    public int minDays(int[] bD, int m, int k) {
+        int mn = 1, mx  = mn, res =-1;
+        for(int i : bD){
+            mx = Math.max(i,mx);
+        }
+
+        while(mn<=mx){
+            int d = mn + (mx-mn)/2;
+            if(check(bD,d,k,m)){
+                res = d;
+                mx = d-1;
+            }
+            else mn = d + 1;
+        }
+        return res;
+    }
+
+
+    public boolean check(int[] a, int d, int k, int m){
+        int cnt = 0, cur = 0;
+        for(int i = 0;i<a.length;i++){
+            if(a[i]<=d){
+                cur++;
                 if(cur==k){
-                    fin++;
-                    cur=0;
+                    cnt++;
+                    cur = 0;
                 }
             }
-            if(fin>=m){
-                h = md-1;
-                rs = md;
+            else{
+                cur = 0;
             }
-            else l = md + 1;
         }
-        return rs;
+        return cnt>=m;
     }
 }
