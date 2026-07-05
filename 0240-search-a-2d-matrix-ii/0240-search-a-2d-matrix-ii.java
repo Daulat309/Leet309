@@ -1,10 +1,9 @@
 class Solution {
-    public boolean searchMatrix(int[][] a, int x) {
-        int r = 0, c = a[0].length-1;
-        if(x<a[r][0]||x>a[a.length-1][c]) return false;
-        while(r<a.length&&c>=0){
-            if(a[r][c]==x) return true;
-            if(a[r][c]>x) c--;
+    public boolean searchMatrix(int[][] mt, int x) {
+        int r = 0, c = mt[0].length-1;
+        while(r<mt.length&&c>=0){
+            if(mt[r][c]==x) return true;
+            if(mt[r][c]>x) c--;
             else r++;
         }
         return false;
