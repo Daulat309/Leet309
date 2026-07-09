@@ -1,21 +1,20 @@
 class Solution {
-    public int[][] intervalIntersection(int[][] fl, int[][] sl) {
-        int in1 = 0, in2 = 0;
+    public int[][] intervalIntersection(int[][] first, int[][] sec) {
+        int f = 0, s = 0;
+        if(first.length==0||sec.length==0) return new int[][]{};
         ArrayList<int[]> list = new ArrayList<>();
-        if(fl.length==0||sl.length==0) return new int[][]{};
-        while(in1<fl.length&&in2<sl.length){
-            int s1 = fl[in1][0], e1 = fl[in1][1];
-            int s2 = sl[in2][0], e2 = sl[in2][1];
-            int s = Math.max(s1,s2), e = Math.min(e1,e2);
-            if(s<=e) list.add(new int[]{s,e});
-            if(e1<e2){
-                in1++;
-            }
-            else{
-                in2++;
-            }
+        while(f<first.length&&s<sec.length){
+            int sm = Math.max(first[f][0], sec[s][0]);
+            int em = Math.min(first[f][1], sec[s][1]);
+            if(sm<=em) list.add(new int[] {sm,em});
+            if(first[f][1]<sec[s][1]) f++;
+            else s++;
         }
-
-        return list.toArray(new int[list.size()][2]);
+        int[][] res = new int[list.size()][2];
+        for(int i = 0;i<list.size();i++){
+            res[i][0] = list.get(i)[0];
+            res[i][1] = list.get(i)[1];
+        }
+        return res;
     }
 }
