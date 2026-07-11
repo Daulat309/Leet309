@@ -8,10 +8,10 @@ class Solution {
             }
             else st.push(c);
         }
-        String str = "";
+        s = "";
         while(!st.isEmpty()){
-            str = st.pop()+str;
+            s = st.pop()+s;
         }
-        return str;
+        return s;
     }
 }
