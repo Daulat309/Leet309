@@ -8,10 +8,10 @@ class Solution {
             }
             else st.push(c);
         }
-        StringBuilder sb = new StringBuilder();
+        String str = "";
         while(!st.isEmpty()){
-            sb.append(st.pop());
+            str = st.pop()+str;
         }
-        return sb.reverse().toString();
+        return str;
     }
 }
