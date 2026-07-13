@@ -1,18 +1,10 @@
 class Solution {
-    public boolean canConstruct(String w, String x) {
-        HashMap<Character,Integer> map = new HashMap<>();
-        for(char c : x.toCharArray()){
-            map.put(c,map.getOrDefault(c,0)+1);
-        }
-        for(char c : w.toCharArray()){
-            int freq = map.getOrDefault(c, 0);
-
-            if (freq == 0) {
-                return false;
-            }
-
-            map.put(c, freq - 1);
-        }
+    public boolean canConstruct(String ransomNote, String magazine) {
+        int[] a = new int[256];
+        int[] b = new int[256];
+        for(int i = 0;i<ransomNote.length();i++) a[ransomNote.charAt(i)]++;
+        for(int i = 0;i<magazine.length();i++) b[magazine.charAt(i)]++;
+        for(int i = 0;i<256;i++) if(a[i]>b[i]) return false;
         return true;
     }
 }
