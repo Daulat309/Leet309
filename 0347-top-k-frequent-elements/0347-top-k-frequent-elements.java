@@ -7,7 +7,7 @@ class Solution {
         }
         Queue<Integer> q = new PriorityQueue<>(
             (a,b) -> {
-                if(map.get(a).equals(map.get(b))) return a-b;
+                if(map.get(a).equals(map.get(b))) return Integer.compare(a,b);
                 return Integer.compare(map.get(a), map.get(b));
             }
         );
