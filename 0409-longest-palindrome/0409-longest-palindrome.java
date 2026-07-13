@@ -1,15 +1,21 @@
 class Solution {
     public int longestPalindrome(String s) {
         HashMap<Character, Integer> map = new HashMap<>();
-        int single = 0, cnt = 0;
-        for(char c : s.toCharArray()){
+        for(int i = 0;i<s.length();i++){
+            char c = s.charAt(i);
             map.put(c,map.getOrDefault(c,0)+1);
-            if(map.get(c)%2==0){
-                single--;
-                cnt++;
-            }
-            else single++;
         }
-        return single>=1?2*cnt+1:2*cnt;
+        int cnt = 0;
+        boolean isodd = false;
+        for(Character c : map.keySet()){
+            int i = map.get(c);
+            if(i%2!=0){
+                cnt += i - 1;
+                isodd = true;
+            }
+            else cnt += i;
+        }
+        if(isodd) cnt++;
+        return cnt;
     }
 }
