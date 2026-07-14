@@ -1,21 +1,28 @@
 class Solution {
-    public int[][] kClosest(int[][] p, int k) {
+    public int[][] kClosest(int[][] points, int k) {
+        HashMap<Integer , Double> map = new HashMap<>();
+        for(int i = 0;i<points.length;i++){
+            int[] a = points[i];
+            double d = Math.sqrt(a[0]*a[0]+a[1]*a[1]);
+            map.put(i,d);
+        }
+
         Queue<Integer> q = new PriorityQueue<>(
-            (a,b)->{
-                double d2 = (double)p[b][0]*p[b][0]+(p[b][1]*p[b][1]);
-                double d1 = (double)p[a][0]*p[a][0]+(p[a][1]*p[a][1]);
-                return Double.compare(d2,d1);
+            (a,b) -> {
+                if(map.get(a).equals(map.get(b))) return Integer.compare(b,a);
+                return Double.compare(map.get(b),map.get(a));
             }
         );
 
-        for(int i = 0;i<p.length;i++){
+        for(Integer i : map.keySet()){
             q.offer(i);
             if(q.size()>k) q.poll();
         }
-        int[][] res = new int[k][2];
-        int i = k - 1;
+
+        int[][] res = new int[q.size()][2];
+        int i = q.size()-1;
         while(!q.isEmpty()){
-            int[]  a = p[q.poll()];
+            int[] a = points[q.poll()];
             res[i][0] = a[0];
             res[i][1] = a[1];
             i--;
