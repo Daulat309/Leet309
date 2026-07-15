@@ -1,69 +1,65 @@
 class Pair{
-    char c;
-    int cnt;
-    Pair(char c, int cnt){
-        this.c = c;
-        this.cnt = cnt;
+    char ch;
+    int pos;
+    int freq;
+
+    Pair(char ch, int pos, int freq){
+        this.ch = ch;
+        this.pos = pos;
+        this.freq = freq;
     }
 }
 
 class Solution {
-    public int leastInterval(char[] t, int n) {
-        int k = 1;
-        int[] ar = new int[26];
-        //Arrays.fill(ar,-1);
+    public int leastInterval(char[] tasks, int n) {
         HashMap<Character, Integer> map = new HashMap<>();
-        for(int i = 0;i<t.length;i++){
-            char c = t[i];
-            map.put(c,map.getOrDefault(c,0)+1);
-        }
-
+        for(char c : tasks) map.put(c,map.getOrDefault(c,0)+1);
         Queue<Pair> q = new PriorityQueue<>(
-            (a,b) -> {
-                if(a.cnt == b.cnt) {
-                    //if(ar[a.c-'A'] == ar[b.c-'A'])
-                    return Character.compare(a.c, b.c);
-                //return ar[b.c-'A'] - ar[a.c-'A'];
-                }
-                return Integer.compare(b.cnt, a.cnt);
-                }
-            );
+            (a,b) ->{
+                return b.freq-a.freq;
+            }
+        );
 
         for(Character c : map.keySet()){
-            q.offer(new Pair(c,map.get(c)));
+            q.offer(new Pair(c,-1,map.get(c)));
         }
-
         ArrayList<Pair> list = new ArrayList<>();
-
+        int cnt = 1;
         while(!q.isEmpty()){
             Pair p = q.poll();
-            if(ar[p.c-'A']==0||(k-ar[p.c-'A'])>n){
-                ar[p.c-'A'] = k;
-                k++;
-                if(p.cnt-1>0){
-                    q.offer(new Pair(p.c,p.cnt-1));
+            if(p.pos!=-1){
+                if(cnt - p.pos<=n){
+                    list.add(p);
                 }
-                if(!list.isEmpty()){
-                    for(int i = 0;i<list.size();i++){
-                        q.offer(list.get(i));
+                else{
+                    p.pos = cnt;
+                    p.freq = p.freq-1;
+                    if(p.freq>0) q.offer(p);
+                    cnt++;
+                    if(!list.isEmpty()){
+                        for(int i = 0;i<list.size();i++) q.offer(list.get(i));
+                        list.clear();
                     }
-                    list.clear();
                 }
             }
             else{
-                list.add(p);
-            }
-            if(q.isEmpty()){
+                p.pos = cnt;
+                p.freq = p.freq-1;
+                if(p.freq>0) q.offer(p);
+                cnt++;
                 if(!list.isEmpty()){
-                    k++;
-                    for(int i = 0;i<list.size();i++){
-                        q.offer(list.get(i));
-                    }
+                    for(int i = 0;i<list.size();i++) q.offer(list.get(i));
                     list.clear();
                 }
-                else k--;
+            }
+            if(q.isEmpty()&&!list.isEmpty()){
+                cnt++;
+                if(!list.isEmpty()){
+                    for(int i = 0;i<list.size();i++) q.offer(list.get(i));
+                    list.clear();
+                }
             }
         }
-        return k;
+        return cnt-1;
     }
 }
