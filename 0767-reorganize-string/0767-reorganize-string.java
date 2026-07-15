@@ -1,56 +1,58 @@
 class Pair{
-    char f;
-    int s;
-    Pair(char f, int s){
-        this.f = f;
-        this.s = s;
+    char ch;
+    int freq;
+
+    Pair(char ch, int freq){
+        this.ch = ch;
+        this.freq = freq;
     }
 }
 
 class Solution {
     public String reorganizeString(String s) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        for(char c : s.toCharArray()){
-            map.put(c,map.getOrDefault(c,0)+1);
-        }
+        int[] a = new int[256];
+        for(char c : s.toCharArray()) a[c]++;
         Queue<Pair> q = new PriorityQueue<>(
-            (a,b) -> {if(a.s==b.s) return a.f-b.f;
-            return Integer.compare(b.s,a.s);
+            (x,y) -> {
+                return y.freq-x.freq;
             }
         );
+        ArrayList<Pair> list = new ArrayList<>();
 
-        for(Map.Entry<Character, Integer> entry : map.entrySet()){
-            q.offer(new Pair(entry.getKey(),entry.getValue()));
-        }
-
-        StringBuilder sb = new StringBuilder();
-
+        for(int i = 0;i<256;i++) if(a[i]!=0) q.offer(new Pair((char)i,a[i]));
+        String str = "";
         while(!q.isEmpty()){
-            Pair p = q.peek();
-            if(!sb.isEmpty()){
-                if(sb.charAt(sb.length()-1)!=p.f){
-                    sb.append(p.f);
-                    q.poll();
-                    if(p.s-1!=0) q.offer(new Pair(p.f,p.s-1));
+            Pair p = q.poll();
+            if(str.length()>0){
+                if(str.charAt(str.length()-1)==p.ch){
+                    list.add(p);
                 }
                 else{
-                    q.poll();
-                    if(!q.isEmpty()){
-                        Pair r = q.peek();
-                        sb.append(r.f);
-                        q.poll();
-                        if(r.s-1!=0) q.offer(new Pair(r.f,r.s-1));
-                        q.offer(p);
-                    }
+                    str += p.ch;
+                    p.freq = p.freq-1;
+                    if(p.freq>0) q.offer(p);
+                    if(!list.isEmpty()) q.offer(list.get(0));
+                    list.clear();
                 }
             }
             else{
-                sb.append(p.f);
-                q.poll();
-                if(p.s-1!=0) q.offer(new Pair(p.f,p.s-1));
+                str += p.ch;
+                p.freq = p.freq-1;
+                if(p.freq>0) q.offer(p);
+                if(!list.isEmpty()) q.offer(list.get(0));
+                list.clear();
+            }
+
+            if(q.isEmpty()&&!list.isEmpty()){
+                if(list.get(0).ch!=str.charAt(str.length()-1)){
+                    q.offer(list.get(0));
+                    list.clear();
+                }
             }
         }
-        String res = sb.toString();
-        return res.length()==s.length()?res:"";
+
+        if(str.length()==s.length()) return str;
+        return "";
+
     }
 }
