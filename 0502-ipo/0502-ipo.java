@@ -1,63 +1,39 @@
+class Pair{
+    int p;
+    int c;
+    Pair(int p, int c){
+        this.p = p;
+        this.c = c;
+    }
+}
+
 class Solution {
-    public int findMaximizedCapital(int k, int w, int[] p, int[] c) {
-        int[][] a = new int[p.length][2];
-        for(int i = 0;i<p.length;i++){
-            a[i][0] = c[i];
-            a[i][1] = p[i];
-        }
-        Arrays.sort(a,(r,s) -> Integer.compare(r[0],s[0]));
-        Queue<Integer> q = new PriorityQueue<>(
-            (r,s) -> {
-                return s-r;
+    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+        Queue<Pair> pq = new PriorityQueue<>(
+            (a,b) -> {
+                return a.c - b.c;
             }
         );
-        int idx = 0;
-        while(k-->0){
-            while(idx<a.length){
-                if(a[idx][0]>w) break;
-                else{
-                    q.offer(a[idx][1]);
-                    idx++;
-                }
+        Queue<Pair> q = new PriorityQueue<>(
+            (a,b) -> {
+                return b.p - a.p;
+            }
+        );
+
+        for(int i = 0;i<profits.length;i++){
+            pq.offer(new Pair(profits[i], capital[i]));
+        }
+
+        int cnt = 0;
+
+        while(cnt<k){
+            while(!pq.isEmpty()&&pq.peek().c<=w){
+                q.offer(pq.poll());
             }
             if(q.isEmpty()) return w;
-            w += q.poll();
+            w += q.poll().p;
+            cnt++;
         }
         return w;
     }
 }
-
-// class Solution {
-//     public int findMaximizedCapital(int k, int w, int[] p, int[] c) {
-//         Queue<Integer> q = new PriorityQueue<>(
-//             (a,b) -> {
-//                 if(p[a]==p[b]) return c[a]-c[b];
-//                 return p[b]-p[a];
-//             }
-//         );
-
-//         for(int i = 0;i<p.length;i++){
-//             if(p[i]>0){
-//                 q.offer(i);
-//             }
-//         }
-        
-//         ArrayList<Integer> list = new ArrayList<>();
-//         while(!q.isEmpty()){
-//             if(k==0) return w;
-//             int idx = q.poll();
-//             if(c[idx]<=w){
-//                 k--;
-//                 w += p[idx];
-//                 for(int i = 0;i<list.size();i++){
-//                     q.offer(list.get(i));
-//                 }
-//                 list.clear(); 
-//             }
-//             else{
-//                 list.add(idx);
-//             }
-//         }
-//         return w;
-//     }
-// }
