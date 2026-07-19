@@ -16,21 +16,21 @@
 class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
-        if(root==null) return list;
         Queue<TreeNode> q = new ArrayDeque<>();
+        if(root==null) return list;
         q.offer(root);
-
         while(!q.isEmpty()){
-            int s = q.size();
-            List<Integer> l = new ArrayList<>();
-            while(s-->0){
-                TreeNode node = q.poll();
-                l.add(node.val);
-                if(node.left!=null) q.offer(node.left);
-                if(node.right!=null) q.offer(node.right);
+            int l = q.size();
+            List<Integer> ls = new ArrayList<>();
+            while(l-->0){
+                TreeNode p = q.poll();
+                ls.add(p.val);
+                if(p.left!=null) q.offer(p.left);
+                if(p.right!=null) q.offer(p.right);
             }
-            list.add(0,l);
+            list.add(ls);
         }
+        Collections.reverse(list);
         return list;
     }
 }
