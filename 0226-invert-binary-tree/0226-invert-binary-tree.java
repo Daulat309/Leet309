@@ -17,23 +17,10 @@ class Solution {
     public TreeNode invertTree(TreeNode root) {
         if(root==null) return root;
         TreeNode temp = root.left;
-        root.left = root.right;
+        root.left=root.right;
         root.right = temp;
         invertTree(root.left);
         invertTree(root.right);
         return root;
     }
-
-    // public void invert(TreeNode p, TreeNode q){
-    //     if(p!=null) invert2(p);
-    //     if(q!=null) invert2(p);
-    // }
-    // public void invert2(TreeNode root) {
-    //     if(root==null) return;
-    //     TreeNode temp = root.left;
-    //     root.left = root.right;
-    //     root.right = temp;
-    //     invert2(root.left);
-    //     invert2(root.right);
-    // }
 }
