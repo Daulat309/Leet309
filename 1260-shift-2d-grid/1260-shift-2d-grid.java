@@ -1,13 +1,14 @@
 class Solution {
     public List<List<Integer>> shiftGrid(int[][] grid, int k) {
         k = k % (grid.length*grid[0].length);
-        int[] temp = new int[grid.length*grid[0].length];
         int s = 0, e = grid.length*grid[0].length-1;
         if(k>0){
             flip(grid,s,e);
             flip(grid,s,k-1);
             flip(grid,k,e);
         }
+        //done! next part requied format for return
+        
         List<List<Integer>> list = new ArrayList<>();
         for(int i = 0;i<grid.length;i++){
             List<Integer> ls = new ArrayList<>();
