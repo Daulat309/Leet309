@@ -14,18 +14,54 @@
  * }
  */
 class Solution {
+    Stack<TreeNode> asc = new Stack<>();
+    Stack<TreeNode> dsc = new Stack<>();
     public boolean findTarget(TreeNode root, int k) {
-        HashMap<Integer,Integer> map = new HashMap<>();
-        boolean[] is = new boolean[1];
-        find(root,k,is,map);
-        return is[0];
+        if(root==null) return false;
+        TreeNode left = root;
+        while(left!=null){
+            asc.push(left);
+            left = left.left;
+        }
+        TreeNode right = root;
+        while(right!=null){
+            dsc.push(right);
+            right = right.right;
+        }
+
+        left = getSmall();
+        right = getBig();
+        while((left!=null&&right!=null)&&(left!=right)&&(left.val<right.val)){
+            int s = left.val + right.val;
+            if(s==k) return true;
+            if(s<k) left = getSmall();
+            else right = getBig();
+        }
+        return false;
+
     }
 
-    public void find(TreeNode root, int x, boolean[] a, HashMap<Integer,Integer> map){
-        if(root==null) return;
-        if(map.containsKey(x-root.val)) a[0] = true;
-        else map.put(root.val,root.val);
-        find(root.left,x,a,map);
-        find(root.right,x,a,map);
+    public TreeNode getSmall(){
+        if(asc.isEmpty()) return null;
+
+        TreeNode small = asc.pop();
+        TreeNode left = small.right;
+        while(left!=null){
+            asc.push(left);
+            left = left.left;
+        }
+        return small;
+    }
+
+    public TreeNode getBig(){
+        if(dsc.isEmpty()) return null;
+
+        TreeNode big = dsc.pop();
+        TreeNode right = big.left;
+        while(right!=null){
+            dsc.push(right);
+            right = right.right;
+        }
+        return big;
     }
 }
