@@ -31,7 +31,7 @@ class Solution {
 
         left = getSmall();
         right = getBig();
-        while((left.val<right.val)){
+        while((left!=null&&right!=null)&&(left!=right)&&(left.val<right.val)){
             int s = left.val + right.val;
             if(s==k) return true;
             if(s<k) left = getSmall();
