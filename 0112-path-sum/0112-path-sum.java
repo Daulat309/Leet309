@@ -16,17 +16,20 @@
 class Solution {
     boolean res = false;
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        check(root, targetSum, 0);
+        check(root, 0, targetSum);
         return res;
     }
 
-    public void check(TreeNode root, int x, int s){
+    public void check(TreeNode root, int s, int k){
         if(root==null) return;
         s += root.val;
         if(root.left==null&&root.right==null){
-            if(s==x) res=true;
+            if(s==k){
+                res = true;
+                return;
+            }
         }
-        check(root.left, x, s);
-        check(root.right, x, s);
+        check(root.left, s, k);
+        check(root.right, s, k);
     }
 }
