@@ -1,37 +1,24 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
-    List<List<Integer>> list = new ArrayList<>();
+    List<List<Integer>> ans = new ArrayList<>();
+
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        check(root, 0, targetSum, new ArrayList<Integer>());
-        return list;
+        dfs(root, targetSum, new ArrayList<>());
+        return ans;
     }
 
+    private void dfs(TreeNode root, int target, List<Integer> path) {
+        if (root == null) return;
 
-    public void check(TreeNode root, int s, int k, List<Integer> ls){
-        if(root==null) return;
-        s += root.val;
-        ls.add(root.val);
-        if(root.left==null&&root.right==null){
-            if(s==k){
-                list.add(new ArrayList<>(ls));
-            }
+        path.add(root.val);
+        target -= root.val;
+
+        if (root.left == null && root.right == null && target == 0) {
+            ans.add(new ArrayList<>(path));
+        } else {
+            dfs(root.left, target, path);
+            dfs(root.right, target, path);
         }
-        check(root.left, s, k, ls);
-        check(root.right, s, k, ls);
-        ls.remove(ls.size() - 1);
+
+        path.remove(path.size() - 1); // backtrack
     }
 }
