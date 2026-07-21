@@ -8,19 +8,23 @@
  * }
  */
 class Solution {
+    TreeNode lca = null;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        List<TreeNode> list = new ArrayList<>();
-        int a = lca(root,p,q,list);
-        return list.get(0);
+        int res = lcnt(root, p, q);
+        return lca;
     }
 
-    public int lca(TreeNode root, TreeNode p, TreeNode q,List<TreeNode> list) {
+    public int lcnt(TreeNode root, TreeNode p, TreeNode q){
         if(root==null) return 0;
-        int l = lca(root.left,p,q,list);
-        int r = lca(root.right,p,q,list);
-        int s = l + r;
-        if(root==p||root==q) s++;
-        if(s>=2&&list.isEmpty()) list.add(root);
-        return s;
+        int cnt = 0;
+        if(root==p||root==q){
+            cnt++;
+        }
+        int left = lcnt( root.left, p, q);
+        int right = lcnt( root.right, p, q);
+        cnt += left;
+        cnt += right;
+        if(cnt>=2) if(lca==null) lca = root;
+        return cnt;
     }
 }
