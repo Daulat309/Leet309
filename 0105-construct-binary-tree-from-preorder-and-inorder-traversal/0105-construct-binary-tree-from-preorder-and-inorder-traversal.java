@@ -15,19 +15,20 @@
  */
 class Solution {
     int idx = 0;
-    HashMap<Integer,Integer> map = new HashMap<>();
-    public TreeNode buildTree(int[] pre, int[] in) {
-        for(int i = 0;i<in.length;i++) map.put(in[i],i);
-        return make(pre,0,in.length-1);
+    HashMap<Integer, Integer> mp = new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        for(int i = 0;i<inorder.length;i++) mp.put(inorder[i], i);
+        return build(preorder, 0, inorder.length-1);
     }
 
-    public TreeNode make(int[] pre, int l, int h){
+    public TreeNode build(int[] p, int l, int h){
         if(l>h) return null;
-        TreeNode node = new TreeNode(pre[idx]);
+        TreeNode node = new TreeNode(p[idx]);
         idx++;
-        int id = map.get(node.val);
-        node.left = make(pre,l,id-1);
-        node.right = make(pre,id+1,h);
+        int id = mp.get(node.val);
+        node.left = build(p, l, id - 1);
+        node.right = build(p, id+1,h);
+
         return node;
     }
 }
