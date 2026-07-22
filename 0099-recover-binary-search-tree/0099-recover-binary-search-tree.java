@@ -14,33 +14,31 @@
  * }
  */
 class Solution {
-    int cnt = 0;
-    TreeNode fst = null;
-    TreeNode scd = null;
     TreeNode prev = null;
+    TreeNode first = null;
+    TreeNode sec = null;
     public void recoverTree(TreeNode root) {
-        check(root);
-        cnt = fst.val;
-        fst.val = scd.val;
-        scd.val = cnt;
+        recover(root);
+        if(first!=null){
+            int tmp = first.val;
+            first.val = sec.val;
+            sec.val = tmp;
+        }
     }
 
-    public void check(TreeNode root){
+    public void recover(TreeNode root) {
         if(root==null) return;
-        check(root.left);
-        if(prev!=null&&root.val<=prev.val){
-            if(cnt==0){
-                fst = prev;
-                scd = root;
-                cnt++;
-            }
-            else {
-            scd = root;
-            return;
+        recover(root.left);
+        if(prev!=null){
+            if(prev.val>=root.val){
+                if(first==null){
+                    first = prev;
+                    sec = root;
+                }
+                else sec = root;
             }
         }
-        
         prev = root;
-        check(root.right);
+        recover(root.right);
     }
 }
