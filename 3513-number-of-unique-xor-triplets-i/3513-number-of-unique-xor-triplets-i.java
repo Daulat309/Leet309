@@ -1,6 +1,7 @@
 class Solution {
     public int uniqueXorTriplets(int[] nums) {
         int mx = Arrays.stream(nums).max().getAsInt();
-        return nums.length>=3?(int) Math.pow(2,Integer.toBinaryString(mx).length()): (int) Math.pow(2,Integer.toBinaryString(mx).length()-1);
+        int bits = (int)(Math.log(mx) / Math.log(2)) + 1;
+        return nums.length>=3?(int) Math.pow(2,bits) : (int) Math.pow(2,bits-1);
     }
 }
