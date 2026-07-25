@@ -1,15 +1,11 @@
 class Solution {
     public int maxProduct(int n) {
-        int m1 = 0, m2 = 0;
+        Queue<Integer> q = new PriorityQueue<>();
         while(n!=0){
-            int d = n%10;
-            if(d>m1){
-                m2 = m1;
-                m1 = d;
-            }
-            else m2 =Math.max(m2,d);
+            q.offer(n%10);
+            if(q.size()>2) q.poll();
             n /= 10;
         }
-        return m1*m2;
+        return q.poll()*q.poll();
     }
 }
