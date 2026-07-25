@@ -1,7 +1,17 @@
 class Solution {
     List<List<String>> list = new ArrayList<>();
     List<String> ls = new ArrayList<>();
+    boolean[][] dp;
     public List<List<String>> partition(String s) {
+        dp = new boolean[s.length()][s.length()];
+        for(int i = 0 ;i<s.length();i++){
+            for(int j = i ;j<s.length();j++){
+                if(ispal(s, i, j)){
+                    dp[i][j] = true;
+                }
+            }
+            
+        }
         pos(s,0);
         return list;
     }
@@ -12,7 +22,7 @@ class Solution {
             return;
         }
         for(int i = c;i<s.length();i++){
-            if(ispal(s, c, i)){
+            if(dp[c][i]){
                 ls.add(s.substring(c,i+1));
                 pos(s,i+1);
                 ls.remove(ls.size()-1);
