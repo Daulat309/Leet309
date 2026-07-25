@@ -2,19 +2,19 @@ class Solution {
     List<List<String>> list = new ArrayList<>();
     List<String> ls = new ArrayList<>();
     public List<List<String>> partition(String s) {
-        pos(s,0,0,0);
+        pos(s,0);
         return list;
     }
 
-    public void pos(String s,int last, int cur, int c){
-        if(cur==s.length()){
+    public void pos(String s,int c){
+        if(c==s.length()){
             list.add(new ArrayList<>(ls));
             return;
         }
         for(int i = c;i<s.length();i++){
-            if(ispal(s, last, i)){
-                ls.add(s.substring(last,i+1));
-                pos(s,i+1 ,i+1, i+1);
+            if(ispal(s, c, i)){
+                ls.add(s.substring(c,i+1));
+                pos(s,i+1);
                 ls.remove(ls.size()-1);
             }
         }
