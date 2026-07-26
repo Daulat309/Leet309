@@ -1,24 +1,28 @@
 class Solution {
     public int maximumProduct(int[] nums) {
-        int mn1 = Integer.MAX_VALUE, mn2 = Integer.MAX_VALUE;
-        int mx1 = Integer.MIN_VALUE, mx2 = Integer.MIN_VALUE, mx3 = Integer.MIN_VALUE;
-        for(int i = 0;i<nums.length;i++){
-            if(nums[i]>mx1){
-                mx3 = mx2;
-                mx2 = mx1;
-                mx1 = nums[i];
+        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+
+        for (int x : nums) {
+            if (x >= max1) {
+                max3 = max2;
+                max2 = max1;
+                max1 = x;
+            } else if (x >= max2) {
+                max3 = max2;
+                max2 = x;
+            } else if (x > max3) {
+                max3 = x;
             }
-            else if(nums[i]>mx2){
-                mx3 = mx2;
-                mx2 = nums[i];
+
+            if (x <= min1) {
+                min2 = min1;
+                min1 = x;
+            } else if (x < min2) {
+                min2 = x;
             }
-            else mx3 = Math.max(mx3,nums[i]);
-            if(nums[i]<mn1){
-                mn2 = mn1;
-                mn1 = nums[i];
-            }
-            else mn2 = Math.min(mn2,nums[i]);
         }
-        return Math.max(mx1*mx2*mx3, mn1*mn2*mx1);
+
+        return Math.max(max1 * max2 * max3, max1 * min1 * min2);
     }
 }
