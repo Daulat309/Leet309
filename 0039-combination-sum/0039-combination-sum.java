@@ -1,33 +1,24 @@
 class Solution {
-    public List<List<Integer>> combinationSum(int[] a, int t) {
-         List<List<Integer>> list = new ArrayList<>();
-         List<Integer> l = new ArrayList<>();
-         per(list,l,a,0,t,0);
-         return list;
+    List<List<Integer>> list = new ArrayList<>();
+    List<Integer> ls = new ArrayList<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        per(0,0,target,candidates);
+        return list;
     }
 
-    public void per(List<List<Integer>> list, List<Integer> l, int[] a, int s,int t,int idx){
-        if(idx==a.length){
-            if(s==t) list.add(new ArrayList<>(l));
+    public void per(int s, int idx, int x, int[] c){
+        if(idx==c.length||s>=x){
+            if(s==x) list.add(new ArrayList<>(ls));
             return;
         }
 
-        per(list,l,a,s,t,idx+1);
-        if(s+a[idx]<=t){
-            s += a[idx];
-            l.add(a[idx]);
-            per(list,l,a,s,t,idx);
-            s -= a[idx];
-            l.remove(l.size()-1);
+        per(s,idx+1,x,c);
+        if(s+c[idx]<=x){
+            s += c[idx];
+            ls.add(c[idx]);
+            per(s,idx,x,c);
+            s -= c[idx];
+            ls.remove(ls.size()-1);
         }
-
-        // for(int i = idx;i<a.length;i++){
-        //     l.add(a[i]);
-        //     s += a[i];
-        //     per(list,l,a,s,t,i);
-        //     s -= a[i];
-        //     l.remove(l.size()-1);  
-        // }
-        return;   
     }
 }
