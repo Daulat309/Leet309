@@ -18,6 +18,7 @@ class Solution {
                 mn2 = i;
             }
         }
-        return Math.max((mx1-1)*(mx2-1), (mn1-1)*(mn2-1));
+        int r1 = (mx1-1)*(mx2-1), r2 = (mn1-1)*(mn2-1);
+        return r1>r2?r1:r2;
     }
 }
