@@ -12,14 +12,14 @@ class Solution {
     }
     public boolean find(char[][] b, int i, int j, int idx, String word){
             if(idx==word.length()) return true;
-            if(i<0||j<0||i>=b.length||j>=b[0].length) return false;
+            if(i<0||j<0||i==b.length||j==b[0].length) return false;
             if(b[i][j]=='$'||b[i][j]!=word.charAt(idx)) return false;
             char temp = b[i][j];
             b[i][j] = '$';
-            for(int[] d : dir){
-                int ni = i+d[0];
-                int nj = j+d[1];
-                if(find(b,ni,nj,idx+1,word)) return true;
+            for (int k = 0; k < 4; k++) {
+                int ni = i + dir[k][0];
+                int nj = j + dir[k][1];
+                if (find(b, ni, nj, idx + 1, word)) return true;
             }
             b[i][j] = temp;
             return false;
