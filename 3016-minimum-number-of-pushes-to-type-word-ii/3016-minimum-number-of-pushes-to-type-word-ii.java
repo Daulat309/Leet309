@@ -1,37 +1,24 @@
 class Solution {
     public int minimumPushes(String word) {
-        int cnt = 0;
-        HashMap<Character, Integer> mp = new HashMap<>();
-        Queue<Character> q = new PriorityQueue<>(
-            (a,b) -> {return Integer.compare(mp.get(b),mp.get(a));}
-        );
-        
-        for(int i = 0;i<word.length();i++){
-            char c = word.charAt(i);
-            mp.put(c,mp.getOrDefault(c,0)+1);
+        int[] freq = new int[26];
+
+        for (char c : word.toCharArray()) {
+            freq[c - 'a']++;
         }
 
-        for(Character c : mp.keySet()){
-            q.offer(c);
+        Arrays.sort(freq);
+
+        int ans = 0;
+        int push = 1;
+
+        for (int i = 25, cnt = 0; i >= 0 && freq[i] > 0; i--, cnt++) {
+            ans += freq[i] * push;
+
+            if ((cnt + 1) % 8 == 0) {
+                push++;
+            }
         }
-        int k = 0;
-        for(int i = 0;i<8&&!q.isEmpty();i++){
-            char c = q.poll();
-            cnt += mp.get(c);
-            k++;
-        }
-        for(int i = 0;i<8&&!q.isEmpty();i++){
-            char c = q.poll();
-            cnt += mp.get(c)*2;
-        }
-        for(int i = 0;i<8&&!q.isEmpty();i++){
-            char c = q.poll();
-            cnt += mp.get(c)*3;
-        }
-        for(int i = 0;i<2&&!q.isEmpty();i++){
-            char c = q.poll();
-            cnt += mp.get(c)*4;
-        }
-        return cnt;
+
+        return ans;
     }
 }
