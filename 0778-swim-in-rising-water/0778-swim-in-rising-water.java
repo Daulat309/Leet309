@@ -28,9 +28,7 @@ class Solution {
             int x = p.x;
 
             if(i==n&&j==m){
-                System.out.println("Entered!");
-                mn = Math.min(x,mn);
-                continue;
+                return x;
             }
             if(vis[i][j]){
                 continue;
