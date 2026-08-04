@@ -20,12 +20,12 @@ class Solution {
             (a,b) -> {return Integer.compare(a.x,b.x);}
         );
         q.offer(new Pair(0,0,grid[0][0]));
+        vis[0][0] = true;
         while(!q.isEmpty()){
             Pair p = q.poll();
             int i = p.i;
             int j = p.j;
             int x = p.x;
-            vis[i][j] = true;
             if(i==n&&j==m){
                 return x;
             }
@@ -33,7 +33,7 @@ class Solution {
                 int ni = i + dx[k];
                 int nj = j + dy[k];
                 if(ni>=0&&nj>=0&&ni<=n&&nj<=m&&!vis[ni][nj]){
-                    System.out.println("Inserted");
+                    vis[i][j] = true;
                     q.offer(new Pair(ni,nj,Math.max(x,grid[ni][nj])));
                 }
             }
