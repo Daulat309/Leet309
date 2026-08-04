@@ -19,21 +19,16 @@ class Solution {
         Queue<Pair> q = new PriorityQueue<>(
             (a,b) -> {return Integer.compare(a.x,b.x);}
         );
-        //Queue<Pair> q = new ArrayDeque<>();
         q.offer(new Pair(0,0,grid[0][0]));
         while(!q.isEmpty()){
             Pair p = q.poll();
             int i = p.i;
             int j = p.j;
             int x = p.x;
-
+            vis[i][j] = true;
             if(i==n&&j==m){
                 return x;
             }
-            if(vis[i][j]){
-                continue;
-            }
-
             for(int k = 0;k<4;k++){
                 int ni = i + dx[k];
                 int nj = j + dy[k];
@@ -42,7 +37,6 @@ class Solution {
                     q.offer(new Pair(ni,nj,Math.max(x,grid[ni][nj])));
                 }
             }
-            vis[i][j] = true;
         }
         return mn;
     }
