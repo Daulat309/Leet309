@@ -4,8 +4,6 @@ class Solution {
     public int[] leftmostBuildingQueries(int[] h, int[][] qr) {
     n = h.length;
     segT = new int[4 * n];
-
-    // Build segment tree
     buildT(0, 0, n - 1, h);
 
     int[] ans = new int[qr.length];
@@ -15,19 +13,17 @@ class Solution {
         int a = Math.min(q[0], q[1]);
         int b = Math.max(q[0], q[1]);
 
-        // They are already at the same building
         if (a == b) {
             ans[k++] = a;
             continue;
         }
 
-        // Alice can directly move to b
         if (h[a] < h[b]) {
             ans[k++] = b;
             continue;
         }
 
-        // Need first j > b such that h[j] > h[a]
+
         int l = b + 1;
         int r = n - 1;
         int res = -1;
@@ -35,15 +31,15 @@ class Solution {
         while (l <= r) {
             int md = l + (r - l) / 2;
 
-            // Maximum height in [l, md]
+            
             int idx = get(0, l, md, 0, n - 1, h);
 
             if (h[idx] > h[a]) {
-                // There is a valid answer in [l, md]
+                
                 res = idx;
                 r = md - 1;
             } else {
-                // No valid answer in [l, md]
+                
                 l = md + 1;
             }
         }
