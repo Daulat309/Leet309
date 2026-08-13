@@ -1,59 +1,62 @@
 class Solution {
+    int[] segT;
     int n;
-    int[] seg;
-    void Update(int p) { 
-        seg[p] = Math.max(seg[p << 1], seg[p << 1 | 1]); 
-    }
-    void Build(int p, int l, int r, int[] baskets) {
-        if (l == r) {
-            seg[p] = baskets[l];
-            return;
-        }
-        int mid = (l + r) >> 1;
-        Build(p << 1, l, mid, baskets);
-        Build(p << 1 | 1, mid + 1, r, baskets);
-        Update(p);
-    }
-    void Assign(int x, int v, int p, int l, int r) {
-        if (x < l || x > r) {
-            return;
-        }
-        if (l == r) {
-            seg[p] = v;
-            return;
-        }
-        int mid = (l + r) >> 1;
-        Assign(x, v, p << 1, l, mid);
-        Assign(x, v, p << 1 | 1, mid + 1, r);
-        Update(p);
-    }
-    int FirstLarger(int v, int p, int l, int r) {
-        if (seg[p] < v) {
-            return r + 1;
-        }
-        if (l == r) {
-            return r;
-        }
-        int mid = (l + r) >> 1;
-        int lf = FirstLarger(v, p << 1, l, mid);
-        if (lf <= mid) {
-            return lf;
-        }
-        return FirstLarger(v, p << 1 | 1, mid + 1, r);
-    }
-    public int numOfUnplacedFruits(int[] fruits, int[] baskets) {
-        n = fruits.length;
-        seg = new int[4 * n + 1];
-        Build(1, 0, n - 1, baskets);
-        int res = 0;
-        for (int x : fruits) {
-            int pos = FirstLarger(x, 1, 0, n - 1);
-            if (pos == n) {
-                res++;
-            } else {
-                Assign(pos, 0, 1, 0, n - 1);
+    public int numOfUnplacedFruits(int[] f, int[] b) {
+        int cnt = 0;
+        n = b.length;
+        segT = new int[4*n];
+        buildT(0, 0, n-1, b);
+        for(int i = 0;i<f.length;i++){
+            int cur = get(0,0,n-1,f[i]);
+            if(cur==-1) cnt++;
+            else{
+                update(0,cur,0, n-1 );
             }
+            
         }
-        return res;
+        return cnt;
+    }
+
+    public void buildT(int idx, int l, int r, int[] b){
+        if(l==r){
+            segT[idx] = b[l];
+            return;
+        }
+
+        int lft = 2*idx+1;
+        int rht = 2*idx+2;
+        int md = l + (r-l)/2;
+        buildT(lft, l, md, b);
+        buildT(rht, md+1, r, b);
+        segT[idx] = Math.max(segT[lft], segT[rht]);
+    }
+
+    public int get(int idx, int l, int r, int k){
+        if(segT[idx]<k) return -1;
+        if(l==r){
+            return l;
+        }
+        int lft = 2*idx+1;
+        int rht = 2*idx+2;
+        int md = l + (r-l)/2;
+        if(segT[lft]>=k) return get(lft, l, md, k);
+        return get(rht, md+1, r, k);
+    }
+
+    public void update(int idx, int i, int l, int r){
+        if(l==r){
+            segT[idx] = -1;
+            return;
+        }
+        int lft = 2*idx+1;
+        int rht = 2*idx+2;
+        int md = l + (r-l)/2;
+
+        if(i<=md){
+            update(lft, i, l, md);
+        }
+        else update(rht, i, md+1, r);
+
+        segT[idx] = Math.max(segT[lft], segT[rht]);
     }
 }
