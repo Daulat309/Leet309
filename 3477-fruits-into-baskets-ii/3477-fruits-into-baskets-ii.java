@@ -32,17 +32,15 @@ class Solution {
     }
 
     public int get(int idx, int l, int r, int k){
+        if(segT[idx]<k) return -1;
         if(l==r){
-            return segT[idx] >= k ? l : -1;
+            return l;
         }
         int lft = 2*idx+1;
         int rht = 2*idx+2;
         int md = l + (r-l)/2;
-        if(segT[idx]>=k){
-            if(segT[lft]>=k) return get(lft, l, md, k);
-            return get(rht, md+1, r, k);
-        }
-        return -1;
+        if(segT[lft]>=k) return get(lft, l, md, k);
+        return get(rht, md+1, r, k);
     }
 
     public void update(int idx, int i, int l, int r){
