@@ -1,8 +1,8 @@
 class Solution {
     public int maximumLengthSubstring(String s) {
         int[] f = new int[256];
-        int l = 0, h = 0, mx = 0;
-        while(h<s.length()){
+        int l = 0, mx = 0;
+        for(int h = 0;h<s.length();h++){
             char c = s.charAt(h);
             f[c]++;
             while(f[c]>2){
@@ -11,7 +11,6 @@ class Solution {
                 l++;
             }
             mx = Math.max(mx, h-l+1);
-            h++;
         }
         return mx;
     }
