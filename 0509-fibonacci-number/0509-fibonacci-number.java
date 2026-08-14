@@ -5,12 +5,9 @@ class Solution {
         Arrays.fill(dp,-1);
         dp[0] = 0;
         dp[1] = 1;
-        return fi(n, dp);
-    }
-
-    public int fi(int n, int[] dp){
-        if(dp[n]!=-1) return dp[n];
-        dp[n] = fi(n-1,dp) + fi(n-2, dp);
+        for(int i = 2;i<=n;i++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
         return dp[n];
     }
 }
