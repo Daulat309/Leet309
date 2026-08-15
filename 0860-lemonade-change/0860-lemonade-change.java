@@ -1,25 +1,25 @@
 class Solution {
     public boolean lemonadeChange(int[] bills) {
-        int[] a = new int[2];
+        int f = 0, t = 0;
         for(int i : bills){
             if(i==20){
-                if((a[0]>0&&a[1]>0)||a[1]>2){
-                    if(a[0]>0&&a[1]>0){
-                        a[0]--;
-                        a[1]--;
+                if(t>0&&f>0||f>2){
+                    if(t>0&&f>0){
+                        t--;
+                        f--;
                     }
-                    else a[1] -= 3;
+                    else f -= 3;
                 }
                 else return false;
             }
             else if(i==10){
-                if(a[1]>0){
-                    a[1]--;
-                    a[0]++;
+                if(f>0){
+                    f--;
+                    t++;
                 }
                 else return false;
             }
-            else a[1]++;
+            else f++;
         }
         return true;
     }
