@@ -1,10 +1,12 @@
 class Solution {
     public boolean canJump(int[] nums) {
-        int cp = 0;
+        if(nums.length==1) return true;
+        int cur = 0;
         for(int i = 0;i<nums.length-1;i++){
-            cp = Math.max(cp,nums[i] + i);
-            if(cp<i+1) return false;
-            if(nums.length-1-nums[i]-i<=0) return true;
+            nums[i] = i + nums[i];
+            cur = Math.max(cur, nums[i]);
+            if(cur>=nums.length-1) return true;
+            if(cur<i+1) return false;
         }
         return true;
     }
