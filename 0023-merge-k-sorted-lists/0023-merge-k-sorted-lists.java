@@ -12,11 +12,14 @@ class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists.length==0) return null;
         int diff = 1;
-        while(diff<lists.length){
-            for(int i = 0;i+diff<lists.length;i += diff*2){
-                lists[i] = merge(lists[i],lists[i+diff]);
-            }
-            diff *= 2;
+        // while(diff<lists.length){
+        //     for(int i = 0;i+diff<lists.length;i += diff*2){
+        //         lists[i] = merge(lists[i],lists[i+diff]);
+        //     }
+        //     diff *= 2;
+        // }
+        for(int i = 1;i<lists.length;i++){
+            lists[0] = merge(lists[0],lists[i]);
         }
         return lists[0];
     }
