@@ -23,7 +23,7 @@ class Solution {
         ListNode prev = dm;
         for(int i = 0;i<r;i++){
             ListNode cur = prev.next;
-            for(int p = 0;p<k-1;p++){
+            for(int p = 1;p<k;p++){
                 ListNode next = cur.next;
                 cur.next = next.next;
                 next.next = prev.next;
