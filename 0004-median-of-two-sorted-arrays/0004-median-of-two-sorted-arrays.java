@@ -1,18 +1,61 @@
 class Solution {
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int[] result = new int[nums1.length+nums2.length];
-        int i = 0;
-        for(int x:nums1){
-            result[i++] = x;
+    public double findMedianSortedArrays(int[] a, int[] b) {
+        int m = a.length, n = b.length, l = m + n;
+        int md = l/2;
+        if(m==0){
+            if(l==1) return (double)b[0];
+            if((l&1)!=1){
+                return ((double)b[md]+(double)b[md-1])/2.0;
+            }
+            return (double)b[md];
         }
-        for(int x:nums2){
-            result[i++] = x;
+        if(n==0){
+            if(l==1) return (double)a[0];
+            if((l&1)!=1){
+                return ((double)a[md]+(double)a[md-1])/2.0;
+            }
+            return (double)a[md];
         }
-        Arrays.sort(result);
-        if(result.length%2==0){
-            return (result[result.length/2]+result[result.length/2-1])/2.0;
+        int x = 0, y = n;
+        while(x+y>md){
+            y--;
         }
-        else
-        return result[result.length/2]/1.0;
+        while(x+y<md){
+            x++;
+        }
+        
+        
+
+        int fmm = Integer.MIN_VALUE;
+        int smn = Integer.MAX_VALUE;
+
+        if(x != 0) fmm = Math.max(fmm, a[x - 1]);
+        if(y != 0) fmm = Math.max(fmm, b[y - 1]);
+
+        if(x != m) smn = Math.min(smn, a[x]);
+        if(y != n) smn = Math.min(smn, b[y]);
+        
+        
+        while(fmm > smn){ 
+            x++; 
+            y--; 
+
+            fmm = Integer.MIN_VALUE;
+            smn = Integer.MAX_VALUE;
+
+            if(x != 0) fmm = Math.max(fmm, a[x - 1]);
+            if(y != 0) fmm = Math.max(fmm, b[y - 1]);
+
+            if(x != m) smn = Math.min(smn, a[x]);
+            if(y != n) smn = Math.min(smn, b[y]);
+        }
+        System.out.println(x + "  " + y +"  "+fmm +"  "+smn);
+        if((l&1)==0){
+            double res = ((double)fmm+(double)smn)/2.0;
+            return res;
+        }
+        else{
+            return (double)smn;
+        }
     }
 }
