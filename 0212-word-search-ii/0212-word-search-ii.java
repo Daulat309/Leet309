@@ -13,7 +13,7 @@ class Solution {
     Node root = new Node();
     int[] dx = new int[]{0,1,0,-1};
     int[] dy = new int[]{1,0,-1,0};
-    HashSet<String> list = new HashSet<>();
+    List<String> list = new ArrayList<>();
     public List<String> findWords(char[][] grid, String[] words) {
         int m = grid.length, n = grid[0].length;
         for(String s : words){
@@ -30,16 +30,17 @@ class Solution {
                     sb.append((char)temp);
                     Node t = current;
                     t = current.Child[temp-'a'];
-                    if(t.eow) list.add(sb.toString());
-                    bfs(i, j, t, grid, sb);
+                    if(t.eow){
+                        list.add(sb.toString());
+                        t.eow = false;
+                    }
+                    dfs(i, j, t, grid, sb);
                     sb.deleteCharAt(sb.length()-1);
                     grid[i][j] = (char)temp;
                 }
             }
         }
-        List<String> ls = new ArrayList<>();
-        ls.addAll(list);
-        return ls;
+        return list;
     }
 
     public void insert(String s){
@@ -56,22 +57,25 @@ class Solution {
         current.eow = true;
     }
 
-    public void bfs(int i, int j, Node current, char[][] grid, StringBuilder sb){
+    public void dfs(int i, int j, Node current, char[][] grid, StringBuilder sb){
         for(int k = 0;k<4;k++){
             int ni = i+dx[k];
             int nj = j+dy[k];
-            if(ni>=0&&nj>=0&&ni<grid.length&&nj<grid[0].length&&grid[ni][nj]!='$'&&current.Child[grid[ni][nj]-'a']!=null){
-                char temp = (char)grid[ni][nj];
-                grid[ni][nj] = '$';
-                sb.append((char)temp);
-                Node t = current;
-                t = current.Child[temp-'a'];
-                if(t.eow) list.add(sb.toString());
-                bfs(ni, nj, t, grid, sb);
-                sb.deleteCharAt(sb.length()-1);
-                grid[ni][nj] = (char)temp;
-            }
-        }
+            if(ni<0||nj<0||ni==grid.length||nj==grid[0].length||grid[ni][nj]=='$') continue;
+            int idx = grid[ni][nj] - 'a';
+            if(current.Child[idx]==null) continue;
         
+            char temp = (char)grid[ni][nj];
+            grid[ni][nj] = '$';
+            sb.append((char)temp);
+            Node t = current.Child[idx];
+            if(t.eow){
+                    list.add(sb.toString());
+                    t.eow = false;
+            }
+            dfs(ni, nj, t, grid, sb);
+            sb.deleteCharAt(sb.length()-1);
+            grid[ni][nj] = (char)temp;
+        }
     }
 }
