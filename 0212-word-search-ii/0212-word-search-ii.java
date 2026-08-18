@@ -38,7 +38,7 @@ class Solution {
             }
         }
         List<String> ls = new ArrayList<>();
-        for(String s : list) ls.add(s);
+        ls.addAll(list);
         return ls;
     }
 
