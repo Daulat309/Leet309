@@ -7,7 +7,7 @@ class Solution {
             sm += d;
             k /= 10;
         }
-        int fin = sm + mul;
-        return n%fin==0;
+        k = sm + mul;
+        return n%k==0;
     }
 }
