@@ -1,33 +1,29 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int lb = fo(nums,target);
-        int ub = lo(nums,target);
-        return lb!=-1?new int[]{lb,ub}:new int[]{-1,-1};
+        if(nums.length==0) return new int[]{-1, -1};
+        int ll = lb(nums, target);
+        int hh = ub(nums, target);
+        return ll==-1? new int[]{-1, -1} : new int[]{ll, hh-1};
     }
 
 
-    public int fo(int[] a,int x){
+    public int lb(int[] a, int x){
+        int l  = 0 , h = a.length-1;
+        while(l<=h){
+            int md = l + (h-l)/2;
+            if(a[md]>=x) h = md-1;
+            else l = md + 1;
+        }
+        return l==a.length?-1:a[l]==x?l:-1;
+    }
+
+    public int ub(int[] a, int x){
         int l = 0, h = a.length-1;
         while(l<=h){
-            int m = l + (h-l)/2;
-            if(a[m]>=x){
-                h = m - 1;
-            }
-            else l = m + 1;
+            int md = l + (h-l)/2;
+            if(a[md]>x) h = md - 1;
+            else l = md + 1;
         }
-        return l == a.length||a[l]!=x?-1:l;
+        return l;
     }
-
-    public int lo(int[] a,int x){
-        int l = 0, h = a.length-1;
-        while(l<=h){
-            int m = l + (h-l)/2;
-            if(a[m]<=x){
-                l = m + 1;
-            }
-            else h = m - 1;
-        }
-        return h;
-    }
-
 }
