@@ -9,6 +9,7 @@ class Solution {
         for (int i = 0; i + k - 1 < n; i++) {
             if (nums[i] == nums[i + k - 1]) {
                 list.add(nums[i]);
+                i = i + k-1;
                 int m = nums[i];
                 while(i<n&&nums[i]==m) i++;
                 i--;
