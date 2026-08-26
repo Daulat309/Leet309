@@ -9,12 +9,9 @@ class Solution {
         for (int i = 0; i + k - 1 < n; i++) {
             if (nums[i] == nums[i + k - 1]) {
                 list.add(nums[i]);
-
-                int j = i + k;
-                while (j < n && nums[j] == nums[i]) {
-                    j++;
-                }
-                i = j - 1;
+                int m = nums[i];
+                while(i<n&&nums[i]==m) i++;
+                i--;
             }
         }
 
