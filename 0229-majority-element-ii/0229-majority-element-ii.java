@@ -4,19 +4,17 @@ class Solution {
 
         List<Integer> list = new ArrayList<>();
         int n = nums.length;
-        int required = n / 3 + 1;
+        int k = n / 3 + 1;
 
-        int count = 1;
+        for (int i = 0; i + k - 1 < n; i++) {
+            if (nums[i] == nums[i + k - 1]) {
+                list.add(nums[i]);
 
-        for (int i = 1; i <= n; i++) {
-
-            if (i < n && nums[i] == nums[i - 1]) {
-                count++;
-            } else {
-                if (count >= required) {
-                    list.add(nums[i - 1]);
+                int j = i + k;
+                while (j < n && nums[j] == nums[i]) {
+                    j++;
                 }
-                count = 1;
+                i = j - 1;
             }
         }
 
