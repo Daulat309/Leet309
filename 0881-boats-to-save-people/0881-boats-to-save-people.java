@@ -12,7 +12,7 @@ class Solution {
             }
             else mn = md + 1;
         }
-        return res;
+        return mn;
     }
 
 
