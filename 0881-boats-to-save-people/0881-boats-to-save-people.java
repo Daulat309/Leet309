@@ -19,7 +19,7 @@ class Solution {
     public boolean isp(int[] a, int x, int y){
         int l = 0, h = a.length-1;
         int cnt = 0;
-        while(l<h){
+        while(l<=h){
             if(a[l]+a[h]<=x){
                 cnt++;
                 l++;
@@ -30,8 +30,6 @@ class Solution {
                 cnt++;
             }
         }
-        if(l==h) cnt++;
-
         if(cnt<=y) return true;
         return false;
     }
