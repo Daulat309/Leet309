@@ -26,7 +26,7 @@ class Solution {
             next = next.next;
         }
 
-        if(q.size()==1) return a;
+        if(q.size()<=1) return a;
 
         int fs = q.poll();
 
