@@ -16,7 +16,6 @@ class Solution {
         ListNode prev = head;
         ListNode cur = head.next;
         ListNode next = head.next.next;
-        Queue<Integer> q = new PriorityQueue<>();
         int i = 1;
         int p = -1;
         int fs = -1;
