@@ -35,10 +35,10 @@ class Solution {
             prev = cur;
             cur = next;
             next = next.next;
-            if(next==null&&fs!=p) a[1] = p - fs;
         }
 
         if(fs!=-1&&fs!=p)a[0] = mn;
+        if(a[0]!=-1) a[1] = p-fs;
         return a;
 
     }
