@@ -18,28 +18,28 @@ class Solution {
         ListNode next = head.next.next;
         Queue<Integer> q = new PriorityQueue<>();
         int i = 1;
+        int p = -1;
+        int fs = -1;
+        int mn = Integer.MAX_VALUE;
         while(next!=null){
-            if((cur.val<prev.val&&cur.val<next.val)||(cur.val>prev.val&&cur.val>next.val)) q.offer(i);
+            if((cur.val<prev.val&&cur.val<next.val)||(cur.val>prev.val&&cur.val>next.val)){
+                if(fs==-1){
+                    fs = i;
+                }
+                else{
+                    if(i-p<mn) mn = i - p;
+                }
+
+                p = i;
+            }
             i++;
             prev = cur;
             cur = next;
             next = next.next;
+            if(next==null&&fs!=p) a[1] = p - fs;
         }
 
-        if(q.size()<=1) return a;
-
-        int fs = q.poll();
-
-        int p = fs;
-        int mn = Integer.MAX_VALUE;
-        while(!q.isEmpty()){
-            int k = q.poll();
-            if(k-p<mn) mn = k - p;
-            if(q.isEmpty()) a[1] = k - fs;
-            p = k;
-        }
-
-        a[0] = mn;
+        if(fs!=-1&&fs!=p)a[0] = mn;
         return a;
 
     }
