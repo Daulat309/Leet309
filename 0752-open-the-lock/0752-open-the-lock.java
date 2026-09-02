@@ -1,68 +1,71 @@
-class Pair{
-    String s;
-    int c;
-
-    Pair(String s, int c){
-        this.s = s;
-        this.c = c;
-    }
-}
-
 class Solution {
     public int openLock(String[] deadends, String target) {
+
         HashSet<String> set = new HashSet<>();
 
-        for(String s : deadends) set.add(s);
-
-        if (target.equals("0000")) {
-            return 0;
+        for (String s : deadends) {
+            set.add(s);
         }
+
+        // Starting position is blocked
         if (set.contains("0000")) {
             return -1;
         }
 
-        Queue<Pair> q = new ArrayDeque<>();
-        q.offer(new Pair("0000",0));
+        // Already at target
+        if (target.equals("0000")) {
+            return 0;
+        }
+
+        Queue<String> q = new ArrayDeque<>();
+        q.offer("0000");
         set.add("0000");
 
-        while(!q.isEmpty()){
-            int l = q.size();
-            Pair p = q.poll();
-            String st = p.s;
-            int ct = p.c;
+        int moves = 0;
 
-            char[] ar = st.toCharArray();
-            for(int i = 0;i<4;i++){
+        while (!q.isEmpty()) {
 
-                char ch = ar[i];
+            int size = q.size();
 
-                int k = ar[i]-'0'+1;
-                if(k<10){
-                    ar[i] = (char)(k+'0');
-                    String ns = new String(ar);
-                    if(ns.equals(target)) return ct+1;
-                    if(!set.contains(ns)){
-                        set.add(ns);
-                        q.offer(new Pair(ns, ct+1));
-                    }
-                    ar[i] = ch;
+            // Process one BFS level
+            while (size-- > 0) {
+
+                String current = q.poll();
+
+                if (current.equals(target)) {
+                    return moves;
                 }
-                k = ar[i]-'0'-1;
-                if(k==-1) k = 9;
-                if(k>=0){
-                    ar[i] = (char)(k+'0');
-                    String ns = new String(ar);
-                    if(ns.equals(target)) return ct+1;
-                    if(!set.contains(ns)){
-                        set.add(ns);
-                        q.offer(new Pair(ns, ct+1));
+
+                char[] ar = current.toCharArray();
+
+                for (int i = 0; i < 4; i++) {
+
+                    char original = ar[i];
+                    int digit = original - '0';
+
+                    ar[i] = (char) (((digit + 1) % 10) + '0');
+
+                    String next = new String(ar);
+
+                    if (set.add(next)) {
+                        q.offer(next);
                     }
-                    ar[i] = ch;
+
+                    ar[i] = (char) (((digit + 9) % 10) + '0');
+
+                    next = new String(ar);
+
+                    if (set.add(next)) {
+                        q.offer(next);
+                    }
+
+                    ar[i] = original;
                 }
             }
+
+            moves++;
         }
 
         return -1;
-        
     }
 }
