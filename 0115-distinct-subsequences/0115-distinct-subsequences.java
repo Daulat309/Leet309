@@ -15,11 +15,13 @@ class Solution {
 
     if(dp[i][j] != -1) return dp[i][j];
 
-    int ans = check(i + 1, j, s, t); // don't choose s[i]
+    int ans = 0; // don't choose s[i]
 
     if(s.charAt(i) == t.charAt(j)) {
-        ans += check(i + 1, j + 1, s, t); // choose s[i]
+        ans += check(i + 1, j + 1, s, t);
+        ans += check(i + 1, j, s, t);
     }
+    else ans += check(i + 1, j , s, t);
 
     return dp[i][j] = ans;
     }
