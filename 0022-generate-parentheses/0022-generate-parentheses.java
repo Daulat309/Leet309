@@ -1,23 +1,25 @@
 class Solution {
-    List<String> list = new ArrayList<>();
+    List<String> list;
     public List<String> generateParenthesis(int n) {
-        add(new StringBuilder(), 0,0,n);
+        list = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        make(0,0,n,sb);
         return list;
-        
     }
 
-    public void add(StringBuilder sb, int open, int close, int n){
-        if(open==n&&open==close){
+    public void make(int o, int c, int n, StringBuilder sb){
+        if(o==n&&c==n){
             list.add(sb.toString());
+            return;
         }
-        if(open<n){
+        if(o<n){
             sb.append('(');
-            add(sb,open+1,close,n);
+            make(o+1,c,n,sb);
             sb.deleteCharAt(sb.length()-1);
         }
-        if(close<open){
+        if(c<o){
             sb.append(')');
-            add(sb,open,close+1,n);
+            make(o,c+1,n,sb);
             sb.deleteCharAt(sb.length()-1);
         }
     }
