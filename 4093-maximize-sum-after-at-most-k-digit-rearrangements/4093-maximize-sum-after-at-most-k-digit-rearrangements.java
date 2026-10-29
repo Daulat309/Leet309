@@ -27,11 +27,9 @@ class Solution {
 
             res += num;
 
-            // Store the gain from rearranging this number
             qq.offer(k - num);
         }
 
-        // Apply operations with the largest gains
         while (kk > 0 && !qq.isEmpty()) {
             int gain = qq.poll();
 
